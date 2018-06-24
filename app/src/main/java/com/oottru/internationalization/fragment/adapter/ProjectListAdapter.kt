@@ -28,6 +28,6 @@ class ProjectListAdapter(val items: ArrayList<String>, val context: Context) : R
 
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextView that will add each animal to
-     val txtTitle = view.txt_title
+    val txtTitle = view.txt_title
     //val txtProjectImage = view.img_project
 }

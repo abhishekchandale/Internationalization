@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-
-
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,14 +21,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            //snackbar(view,"Hi!","Action"){toast("Azione!!")}
-        }
 
         initNavigation()
     }
 
-    private fun initNavigation(){
+    private fun initNavigation() {
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -63,7 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun navigateTo(fragment: Fragment){
+    private fun navigateTo(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.contentFrame, fragment).commit()
     }
@@ -74,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_camera -> {
                 // Handle the camera action
-            //    toast("Click Camera")
+                //    toast("Click Camera")
 
 
                 /*
@@ -94,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_gallery -> {
-            //    toast("Nav gallery")
+                //    toast("Nav gallery")
 
                 /*
                 supportFragmentManager.beginTransaction()
@@ -109,10 +104,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
                 drawer_layout!!.closeDrawers()
             }
-            R.id.nav_share -> {
+            R.id.signout -> {
 
             }
-            R.id.nav_send -> {
+            R.id.language -> {
 
             }
         }

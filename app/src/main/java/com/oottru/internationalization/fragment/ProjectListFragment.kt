@@ -11,9 +11,6 @@ import com.oottru.internationalization.R
 import com.oottru.internationalization.fragment.adapter.ProjectListAdapter
 
 
-/**
- * Created by marco on 08/11/17.
- */
 class ProjectListFragment : Fragment(), ProjectListContract.View {
     var items: ArrayList<String>? = null
     var mView: View? = null
@@ -21,11 +18,6 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
     var layoutManager: GridLayoutManager? = null
     override lateinit var presenter: ProjectListContract.Presenter
 
-    /*
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-    */
 
     override fun onResume() {
         super.onResume()
@@ -36,7 +28,7 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
                               savedInstanceState: Bundle?): View? {
         // Create the presenter
         presenter = ProjectListPresenter()
-        mView= inflater.inflate(R.layout.fragment_one, container, false)
+        mView = inflater.inflate(R.layout.fragment_one, container, false)
         return mView
 
     }
@@ -66,12 +58,10 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
         items?.add("Mothers Day")
 
 
-
         val adapter = ProjectListAdapter(items!!, this.activity!!)
         layoutManager = GridLayoutManager(this.activity!!, 2, GridLayoutManager.VERTICAL, false)
-        recycler?.layoutManager=layoutManager
+        recycler?.layoutManager = layoutManager
         recycler?.setAdapter(adapter)
-
 
 
     }

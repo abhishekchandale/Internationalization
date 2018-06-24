@@ -1,15 +1,13 @@
 package com.oottru.internationalization
 
-/**
- * Created by marco on 08/11/17.
- */
 interface MainContract {
-    interface View{
+    interface View {
         fun showLoading()
         fun showFragment_One()
         fun showFragment_Two()
     }
-    interface Presenter{
+
+    interface Presenter {
         fun start()
         //fun loadMain()
     }

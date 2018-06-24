@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import com.oottru.internationalization.R
 
 
-/**
- * Created by marco on 08/11/17.
- */
 class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
     override lateinit var presenter: ProjectDetailContract.Presenter
 

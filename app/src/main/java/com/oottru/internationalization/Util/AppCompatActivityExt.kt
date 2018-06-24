@@ -7,9 +7,6 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 
-/**
- * Created by marco on 08/11/17.
- */
 
 /**
  * The `fragment` is added to the container view with id `frameId`. The operation is
