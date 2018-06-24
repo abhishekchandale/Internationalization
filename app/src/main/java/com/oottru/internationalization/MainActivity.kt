@@ -1,15 +1,20 @@
 package com.oottru.internationalization
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.oottru.internationalization.fragment.ProjectDetailFragment
+import com.oottru.internationalization.fragment.ProjectListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+
+
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,10 +24,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            //snackbar(view,"Hi!","Action"){toast("Azione!!")}
         }
 
+        initNavigation()
+    }
+
+    private fun initNavigation(){
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -55,20 +63,51 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    private fun navigateTo(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFrame, fragment).commit()
+    }
+
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_camera -> {
                 // Handle the camera action
+            //    toast("Click Camera")
+
+
+                /*
+                //from google sample
+                val fragmentOne = supportFragmentManager.findFragmentById(R.id.contentFrame)
+                        as ProjectListFragment? ?: ProjectListFragment.newInstance().also {
+                    replaceFragmentInActivity(it, R.id.contentFrame)
+                }
+                */
+
+                //my way
+                /*
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.contentFrame, ProjectListFragment.newInstance()).commit()
+                        */
+                navigateTo(ProjectListFragment.newInstance())
+
             }
             R.id.nav_gallery -> {
+            //    toast("Nav gallery")
+
+                /*
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.contentFrame, ProjectDetailFragment.newInstance()).commit()
+                */
+                navigateTo(ProjectDetailFragment.newInstance())
 
             }
             R.id.nav_slideshow -> {
 
             }
             R.id.nav_manage -> {
-
+                drawer_layout!!.closeDrawers()
             }
             R.id.nav_share -> {
 
