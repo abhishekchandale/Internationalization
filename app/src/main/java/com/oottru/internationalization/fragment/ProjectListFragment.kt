@@ -9,19 +9,30 @@ import android.view.View
 import android.view.ViewGroup
 import com.oottru.internationalization.R
 import com.oottru.internationalization.fragment.adapter.ProjectListAdapter
+import com.oottru.internationalization.model.DummyDataModel
+import com.oottru.internationalization.service.ApiServiceInterface
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 
 class ProjectListFragment : Fragment(), ProjectListContract.View {
-    var items: ArrayList<String>? = null
-    var mView: View? = null
-    var recycler: RecyclerView? = null
-    var layoutManager: GridLayoutManager? = null
+    private var mView: View? = null
+    private var recycler: RecyclerView? = null
+    private var layoutManager: GridLayoutManager? = null
+    private var compositeDisposable: CompositeDisposable? = null
+    private var mArrayList: ArrayList<DummyDataModel>? = null
+
     override lateinit var presenter: ProjectListContract.Presenter
 
+    private val apiService by lazy {
+        ApiServiceInterface.create()
+    }
 
     override fun onResume() {
         super.onResume()
         presenter.start()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +46,10 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //textView1.text = "Fragment 1 Loaded"
         recycler = mView?.findViewById(R.id.recyclerView) as RecyclerView
-        callAdapter()
+        compositeDisposable = CompositeDisposable()
+        loadJSON()
+
     }
 
     companion object {
@@ -45,24 +57,29 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
         fun newInstance() = ProjectListFragment()
     }
 
-    fun callAdapter() {
-        items = ArrayList()
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
-        items?.add("Mothers Day")
+    private fun loadJSON() {
 
+        compositeDisposable?.add(apiService.getImages()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError))
 
-        val adapter = ProjectListAdapter(items!!, this.activity!!)
+    }
+
+    private fun handleResponse(androidList: List<DummyDataModel>) {
+        mArrayList = ArrayList(androidList)
+        val adapter = ProjectListAdapter(mArrayList!!, this.activity!!)
         layoutManager = GridLayoutManager(this.activity!!, 2, GridLayoutManager.VERTICAL, false)
         recycler?.layoutManager = layoutManager
         recycler?.setAdapter(adapter)
+    }
 
+    private fun handleError(error: Throwable) {
+        println("Error ${error.localizedMessage}")
+    }
 
+    override fun onPause() {
+        super.onPause()
+        compositeDisposable?.clear()
     }
 }
