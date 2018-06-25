@@ -1,0 +1,14 @@
+[
+  {
+    "resource_key": "lbl_email",
+    "value": "이메일을 입력하십시오.",
+    "id": 23,
+    "locale": "en"
+  },
+  {
+    "resource_key": "lbl_password",
+    "value": "Enter your password",
+    "id": 23,
+    "locale": "en"
+  }
+]

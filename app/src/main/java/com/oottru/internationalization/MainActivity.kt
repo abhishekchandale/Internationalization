@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.oottru.internationalization.fragment.ProjectDetailFragment
 import com.oottru.internationalization.fragment.ProjectListFragment
+import com.oottru.internationalization.fragment.SignInFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -107,7 +108,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 drawer_layout!!.closeDrawers()
             }
             R.id.signout -> {
-
+             navigateTo(SignInFragment.newInstance())
             }
             R.id.language -> {
 
