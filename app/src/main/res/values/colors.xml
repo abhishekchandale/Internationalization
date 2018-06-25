@@ -4,5 +4,26 @@
     <color name="colorPrimaryDark">#383F46</color>
     <color name="colorAccent">#FF4081</color>
 
+
+    <!--PROJECT DETAILS-->
+    <color name="detail_h1_font_color">#333333</color>
+    <color name="detail_h2_medium_font_color">#333333</color>
+    <color name="detail_h2_medium_disabled_font_color">#B3B3B3</color>
+    <color name="detail_large_body_font_color">#666666</color>
+    <color name="detail_large_body_disable_font_color">#B3B3B3</color>
+    <color name="detail_label_medium_font_color">#72BC00</color>
+    <color name="detail_label_small_font_color">#666666</color>
+    <color name="detail_input_font_color">#333333</color>
+    <color name="detail_hint_font_color">#B3B3B3</color>
+    <color name="detail_primary_hyperlink_color">#75C003</color>
+    <color name="detail_secondary_hyperlink_color">#333333</color>
+    <color name="detail_error_font_color">#D0021B</color>
     <color name="detail_field_border_color">#E2E2E4</color>
+    <color name="detail_divider_line_color">#E2E2E4</color>
+    <color name="imagelist_item">#ededee</color>
+    <color name="detail_bottom_color">#f0f0f1</color>
+    <color name="jet">#333333</color>
+    <color name="LTGRAY">#FFCCCCCC</color>
+    <color name="lightgray_disable">#b3b3b3</color>
+    <color name="lightgray_disable_light">#e2e2e4</color>
 </resources>
