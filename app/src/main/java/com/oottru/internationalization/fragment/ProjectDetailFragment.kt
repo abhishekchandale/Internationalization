@@ -20,7 +20,7 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
                               savedInstanceState: Bundle?): View? {
         // Create the presenter
         presenter = ProjectDetailPresenter()
-        return inflater.inflate(R.layout.fragment_two, container, false)
+        return inflater.inflate(R.layout.fragment_project_list_detail, container, false)
 
     }
 

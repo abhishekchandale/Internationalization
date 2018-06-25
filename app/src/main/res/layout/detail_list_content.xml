@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/fragment_project_list_detail">
+
+
+    <LinearLayout
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/detail_header_view"
+            layout="@layout/widget_detail_header_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_45px" />
+
+        <include
+            android:id="@+id/detail_description_view"
+            layout="@layout/widget_detail_description_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_45px" />
+
+        <View
+            android:id="@+id/lineAfterDescription"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/detail_divider_line_color" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_45px" />
+
+        <include
+            layout="@layout/widget_detail_finished_size_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:id="@+id/spaceAfterDimensions"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_45px" />
+
+        <View
+            android:id="@+id/lineAfterDimensions"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/detail_divider_line_color" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_45px" />
+
+        <include
+            android:id="@+id/detail_material_view"
+            layout="@layout/widget_detail_material_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_17px" />
+
+        <include
+            android:id="@+id/detail_basic_skills_view"
+            layout="@layout/widget_detail_basicskills_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/detail_divider_line_color" />
+
+        <include
+            android:id="@+id/detail_instructions_view"
+            layout="@layout/widget_detail_instructions_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -6,4 +6,35 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+
+
+    <!-- Home screen start-->
+    <string name="HOME_NEWPROJECT">New Project</string>
+    <string name="HOME_MYPROJECTS">My Projects</string>
+    <string name="PROJECT_DETAIL_DESCRIPTION">Description</string>
+    <string name="PROJECT_DETAIL_FINISHED_SIZE">Finished Size</string>
+    <string name="PROJECT_DETAIL_MATERIALS_TO_CUT">Materials to cut</string>
+    <string name="PROJECT_DETAIL_EVERYTHING_ELSE_YOU_NEED">Everything else you need</string>
+    <string name="PROJECT_DETAIL_MORE_HELP">More help</string>
+    <string name="PROJECT_DETAIL_IMAGES_FONTS_USED">Images and fonts used in this project</string>
+    <string name="PROJECT_DETAIL_MAKE_IT_BTN">Make It</string>
+    <string name="PROJECT_DETAIL_CUSTOMIZE_BTN">Customize</string>
+    <string name="PROJECTS_YOUR_FUTURE_PROJECT">Your Future Project</string>
+    <string name="detail_basic_skills">Basic skills required</string>
+    <string name="PROJECTS_FEATURED_PROJECTS">Featured Projects</string>
+    <string name="PROJECTS_ALL_CATEGORIES">All Categories</string>
+    <string name="PROJECT_DETAILS_MY_READY_TO_MAKE_PROJECTS">My Ready-to-Make Projects</string>
+    <string name="PROJECT_DETAILS_SEARCH_IN_PARAMS">Search in %1$s</string>
+    <string name="PROJECTS_LOADING_PLEASE_WAIT">Loading. Please wait…</string>
+    <string name="PROJECTS_EXCLUSIVE">Exclusive</string>
+    <string name="skill_projectdetail_basicskills_text">Skills</string>
+    <string name="PROJECT_DETAILS_LOADING_PROJECT">Loading Project…</string>
+    <string name="PROJECT_DETAILS_SOMETHING_WENT_WRONG">Something Went Wrong</string>
+    <string name="PROJECT_DETAILS_PROJECT_OPEN_UNSUCCESSFUL">Project Open Unsuccessful</string>
+    <string name="PROJECT_DETAILS_BY">By</string>
+    <string name="PROJECT_DETAILS_YOUR_READY_TO_MAKE_PROJECTS">Your ready-to-make projects will show up here.</string>
+    <string name="PROJECT_DETAILS_ERROR_LOADING_THE_MATS">Error Loading the Mats</string>
+    <string name="PROJECT_DETAILS_NO_IMAGES_FOR_MAT_TO_LOAD">No images for mat to load</string>
+
 </resources>

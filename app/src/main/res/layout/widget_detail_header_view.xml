@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.oottru.internationalization.projectlisting.DetailHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_5px" />
+<!--
+    <com.cricut.ds.common.widgets.slider.Indicators.PagerIndicator
+        android:id="@+id/detail_slider_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:gravity="center|fill_vertical"
+        app:pager_selected_color="@color/style_color_accent"
+        app:pager_selected_drawable="@drawable/selectable_pager_indicator_bg"
+        app:pager_selected_height="6dp"
+        app:pager_selected_padding_left="5dp"
+        app:pager_selected_padding_right="5dp"
+        app:pager_selected_width="6dp"
+        app:pager_unselected_color="@color/grey002"
+        app:pager_unselected_height="6dp"
+        app:pager_unselected_padding_left="5dp"
+        app:pager_unselected_padding_right="5dp"
+        app:pager_unselected_width="6dp"
+        app:shape="oval" />-->
+
+    <ImageView
+        android:id="@+id/print_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        app:srcCompat="@drawable/print_icon"
+        tools:ignore="VectorDrawableCompat" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_26px" />
+
+    <TextView
+        android:id="@+id/project_item_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="Rob and Bob - Sunflower...Mother’s Day"
+        android:lineSpacingExtra="@dimen/detail_14px"
+        android:textColor="@color/detail_h1_font_color"
+        android:textSize="@dimen/detail_h1_font_size"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_project_title_line_space" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/detail_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingEnd="8dip"
+            android:textColor="@color/detail_label_small_font_color"
+            android:textSize="@dimen/detail_large_body_font_size"
+            android:paddingRight="8dip"
+            android:text="Easy"/>
+
+        <TextView
+            android:id="@+id/detail_difficulty_bar"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/detail_difficulty"
+            android:layout_alignTop="@id/detail_difficulty"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/detail_difficulty"
+            android:background="@color/detail_divider_line_color" />
+
+        <TextView
+            android:id="@+id/detail_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/detail_difficulty_bar"
+            android:gravity="center_vertical"
+            android:paddingStart="8dip"
+            android:textColor="@color/detail_label_small_font_color"
+            android:textSize="@dimen/detail_large_body_font_size"
+            android:paddingLeft="8dip"
+            android:text="30 Minutes – 1 Hour"/>
+
+    </RelativeLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_45px" />
+
+    <TextView
+        android:id="@+id/detail_project_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/detail_20px"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/detail_14px"
+        android:textColor="@color/detail_label_small_font_color"
+        android:textSize="@dimen/detail_h2_font_size"
+        android:text=""/>
+
+
+</com.oottru.internationalization.projectlisting.DetailHeaderView>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.oottru.internationalization.projectlisting.DescriptionView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/detail_description_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/PROJECT_DETAIL_DESCRIPTION"
+        android:textColor="@color/detail_large_body_font_color"
+        android:textSize="@dimen/detail_large_body_font_size"
+        />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_16px"
+        />
+
+    <TextView
+        android:id="@+id/detail_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="@dimen/detail_12px"
+        android:textSize="@dimen/detail_body_font_size"
+        />
+
+</com.oottru.internationalization.projectlisting.DescriptionView>

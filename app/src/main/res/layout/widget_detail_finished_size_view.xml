@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_finished_size_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/detail_finishedsize_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/PROJECT_DETAIL_FINISHED_SIZE"
+        android:textColor="@color/detail_large_body_font_color"
+        android:textSize="@dimen/detail_large_body_font_size"
+        />
+
+    <TextView
+        android:id="@+id/detail_finishedsize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detail_body_font_size"
+        android:layout_marginTop="@dimen/detail_16px"
+        />
+
+    <RelativeLayout
+        android:id="@+id/variation_holder"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/detail_16px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_light_gray_line">
+        <Spinner
+            android:id="@+id/detail_finish_size_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:overlapAnchor="true"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/style_color_primary"
+            android:textCursorDrawable="@drawable/bg_input_cursor"
+            android:textSize="16sp"
+            />
+
+        <ImageView
+            android:id="@+id/dropdown_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end|center"
+            android:layout_marginLeft="@dimen/material_10dp"
+            android:layout_toEndOf="@id/detail_finish_size_spinner"
+            app:srcCompat="@drawable/cs_menu_down_black_without_space"
+            android:layout_toRightOf="@id/detail_finish_size_spinner"
+            tools:ignore="VectorDrawableCompat" />
+    </RelativeLayout>
+</LinearLayout>

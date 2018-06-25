@@ -26,4 +26,13 @@
     <color name="LTGRAY">#FFCCCCCC</color>
     <color name="lightgray_disable">#b3b3b3</color>
     <color name="lightgray_disable_light">#e2e2e4</color>
+
+
+
+    <color name="style_color_primary">#4A555D</color>
+    <color name="style_color_primary_dark">#424c53</color>
+    <color name="style_color_primary_dark1">#3b444a</color>
+    <color name="dark_gray_color">#555555</color> <!-- 0.333 of white (as defined by ios) -->
+    <color name="light_gray_color">#AAAAAA</color> <!-- 0.667 of white (as defined by ios) -->
+    <color name="detail_line_color">#dedede</color>
 </resources>
