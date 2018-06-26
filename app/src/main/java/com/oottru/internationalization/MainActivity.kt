@@ -1,5 +1,6 @@
 package com.oottru.internationalization
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -8,13 +9,12 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.oottru.internationalization.activity.SettingsActivity
 import com.oottru.internationalization.fragment.ProjectDetailFragment
 import com.oottru.internationalization.fragment.ProjectListFragment
 import com.oottru.internationalization.fragment.SignInFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-
-
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -55,10 +55,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+
+        val id = item.itemId
+        if (id == R.id.action_settings) {
+            // launch settings activity
+            startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
+            return true
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun navigateTo(fragment: Fragment) {
@@ -92,7 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_gallery -> {
-            //    toast("Nav gallery")
+                //    toast("Nav gallery")
 
                 /*
                 supportFragmentManager.beginTransaction()
@@ -108,9 +112,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 drawer_layout!!.closeDrawers()
             }
             R.id.signout -> {
-             navigateTo(SignInFragment.newInstance())
+                navigateTo(SignInFragment.newInstance())
             }
             R.id.language -> {
+
 
             }
         }

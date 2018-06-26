@@ -37,4 +37,11 @@
     <string name="PROJECT_DETAILS_ERROR_LOADING_THE_MATS">Error Loading the Mats</string>
     <string name="PROJECT_DETAILS_NO_IMAGES_FOR_MAT_TO_LOAD">No images for mat to load</string>
 
+
+
+
+    <!--Settings Screen-->
+    <string name="title_activity_settings">Settings</string>
+
+
 </resources>

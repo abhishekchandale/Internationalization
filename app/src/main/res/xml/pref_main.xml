@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Account Settings">
+
+
+        <ListPreference
+            android:defaultValue="3"
+            android:dialogTitle="Country"
+            android:entries="@array/pref_languages_entries"
+            android:entryValues="@array/pref_languages_values"
+            android:key="Country"
+            android:title="Country" />
+
+
+        <ListPreference
+            android:defaultValue="3"
+            android:dialogTitle="Currency"
+            android:entries="@array/pref_languages_entries"
+            android:entryValues="@array/pref_languages_values"
+            android:key="Currency"
+            android:title="Currency" />
+
+
+        <ListPreference
+            android:defaultValue="3"
+            android:dialogTitle="Language"
+            android:entries="@array/pref_languages_entries"
+            android:entryValues="@array/pref_languages_values"
+            android:key="Language"
+            android:title="Language" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
