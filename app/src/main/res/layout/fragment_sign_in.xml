@@ -1,75 +1,128 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity"
+    tools:context=".MainActivity">
 
-    android:background="#ffffff">
+    <ImageView
+        android:id="@+id/signIncloseIcon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="top|right"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/vector_close_button"
+        tools:ignore="VectorDrawableCompat" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="10dp"
-        >
-        <TextView
-            android:id="@+id/lbl_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="Text1"
-            android:layout_marginTop="10dp"/>
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_top_bg"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            android:textColorHint="#cccccc"/>
-        <TextView
-            android:id="@+id/lbl_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="Text1"
-            android:layout_marginTop="10dp"/>
-           />
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_default_bg"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:textColorHint="#cccccc"
-            android:password="true"
-          />
-        <Button
-            android:id="@+id/btnSingIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="4dp"
-            android:textColor="@color/white"
-            android:background="@color/detail_label_medium_font_color"
-            android:text="Sign In"
-            android:layout_marginTop="30dp"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
 
-            />
+        <ImageView
+            android:id="@+id/signin_logo"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/splashscreen_logo" />
+
+        <TextView
+            android:id="@+id/signin_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Use your Cricut ID for everything you do with Cricut" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:padding="10dp"
-        ></LinearLayout>
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Sign in with your Cricut ID"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mbl_lbl_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Text1"
+            android:textColor="@color/colorAccent" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sign_in_ed_bg"
+            android:padding="10dp"
+            android:textColorHint="#cccccc" />
+
+        <TextView
+            android:id="@+id/lbl_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Text1"
+            android:textColor="@color/colorAccent" />
+        />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sign_in_ed_bg"
+            android:padding="10dp"
+            android:password="true"
+            android:textColorHint="#cccccc" />
+
+    </LinearLayout>
 
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btnSingIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_marginTop="60dp"
+            android:background="@color/detail_label_medium_font_color"
+            android:padding="10dp"
+            android:text="Sign In"
+            android:textColor="@color/white"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>

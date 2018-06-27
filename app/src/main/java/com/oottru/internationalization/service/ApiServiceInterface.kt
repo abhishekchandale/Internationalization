@@ -3,6 +3,8 @@ package com.oottru.internationalization.service
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.model.DummyDataModel
 import com.oottru.internationalization.model.DummyModel
+import com.oottru.internationalization.model.LanguageModel
+import com.oottru.internationalization.model.TranslationsModel
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -21,6 +23,13 @@ interface ApiServiceInterface {
 
     @GET("movies_2017.json")
     fun getImages(): Observable<List<DummyDataModel>>
+
+
+    @GET("language")
+    fun getLanguagePreferences(): Observable<List<LanguageModel>>
+
+    @GET("translation")
+    fun getTranslations(@Query("code") code: String): Observable<List<TranslationsModel>>
 
     companion object {
         fun create(): ApiServiceInterface {

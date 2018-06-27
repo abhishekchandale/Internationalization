@@ -1,24 +1,59 @@
 package com.oottru.internationalization.Util
 
+import android.content.Context
+import android.content.res.Resources
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.text.InputFilter
 import android.text.InputType
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.oottru.internationalization.R
+import java.util.*
 
-class CreateViewElement() {
+
+class CreateViewElement constructor(val context: Context) {
 
 
     companion object {
-        val EDIT_TEXT: String = "edittext"
-        val TEXT_VIEW_TEXT: String = "textview"
-        val BUTTON: String = "button"
+        const val KEY_EDIT_TEXT: String = "et"
+        const val KEY_TEXT_VIEW: String = "tx"
+        const val KEY_BUTTON: String = "btn"
     }
 
-    fun createViewByType(type: String) {
-        when (type) {
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    fun getItemViewType(type: String): View {
 
+        val layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        layoutParams.setMargins(dpToPx(30), 10, dpToPx(30), 0)
+        var v: View? = null
+        if (KEY_EDIT_TEXT == type) {
+            val editText: EditText = EditText(context)
+            editText.layoutParams = layoutParams
+            editText.hint = "Enter value"
+            editText.id = Random().nextInt()
+            editText.background = (context.resources.getDrawable(R.drawable.edittext_top_bg))
+            editText.inputType = InputType.TYPE_CLASS_TEXT
+            v = editText
         }
+        if (KEY_TEXT_VIEW == type) {
+            val textView: TextView = TextView(context)
+            textView.layoutParams = layoutParams
+            textView.id = Random().nextInt()
+            v = textView
+        }
+        if (KEY_BUTTON == type) {
+            val button: Button = Button(context)
+            button.layoutParams = layoutParams
+            button.id = Random().nextInt()
+            v = button
+        }
+        return v!!
     }
-
 
     private fun getInputType(text: String): Int {
         when (text) {
@@ -33,6 +68,14 @@ class CreateViewElement() {
     private fun setMaxLength(editText: EditText, maxLength: Int) {
         val fArray = arrayOfNulls<InputFilter>(1)
         fArray[0] = InputFilter.LengthFilter(maxLength)
-        editText.setFilters(fArray)
+        editText.filters = fArray
+    }
+
+    fun dpToPx(dp: Int): Int {
+        return (dp * Resources.getSystem().getDisplayMetrics().density).toInt();
+    }
+
+    fun pxToDp(px: Int): Int {
+        return (px / Resources.getSystem().getDisplayMetrics().density).toInt()
     }
 }

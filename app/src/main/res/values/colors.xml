@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#4B555E</color>
     <color name="colorPrimaryDark">#383F46</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#75C003</color>
 
 
     <!--PROJECT DETAILS-->
@@ -15,7 +15,7 @@
     <color name="detail_label_small_font_color">#666666</color>
     <color name="detail_input_font_color">#333333</color>
     <color name="detail_hint_font_color">#B3B3B3</color>
-    <color name="detail_primary_hyperlink_color">#75C003</color>
+    <color name="ç">#75C003</color>
     <color name="detail_secondary_hyperlink_color">#333333</color>
     <color name="detail_error_font_color">#D0021B</color>
     <color name="detail_field_border_color">#E2E2E4</color>
@@ -27,7 +27,7 @@
     <color name="lightgray_disable">#b3b3b3</color>
     <color name="lightgray_disable_light">#e2e2e4</color>
 
-
+    <color name="grey001">#d1d1d1</color>
 
     <color name="style_color_primary">#4A555D</color>
     <color name="style_color_primary_dark">#424c53</color>
@@ -36,4 +36,5 @@
     <color name="light_gray_color">#AAAAAA</color> <!-- 0.667 of white (as defined by ios) -->
     <color name="detail_line_color">#dedede</color>
     <color name="white">#ffffff</color>
+    <color name="style_color_accent">#75C003</color>
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.oottru.internationalization.activity.SettingsActivity
+import com.oottru.internationalization.fragment.LanguagePrefFragment
 import com.oottru.internationalization.fragment.ProjectDetailFragment
 import com.oottru.internationalization.fragment.ProjectListFragment
 import com.oottru.internationalization.fragment.SignInFragment
@@ -23,8 +24,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-
         initNavigation()
     }
 
@@ -115,8 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navigateTo(SignInFragment.newInstance())
             }
             R.id.language -> {
-
-
+                navigateTo(LanguagePrefFragment.newInstance())
             }
         }
 
