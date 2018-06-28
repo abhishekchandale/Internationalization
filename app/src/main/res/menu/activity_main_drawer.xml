@@ -5,22 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:title="Project List" />
+            android:id="@+id/mbl_lbl_home"
+            android:title="Home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:title="Machine Setup" />
+            android:id="@+id/mbl_lbl_machinesetup"
+            android:title="" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/mbl_lbl_contactinfo"
             android:title="Contact Info" />
+
         <item
-            android:id="@+id/nav_manage"
-            android:title="Feedback" />
-        <item
-            android:id="@+id/language"
+            android:id="@+id/mbl_lbl_language"
             android:title="Language" />
         <item
-            android:id="@+id/signout"
+            android:id="@+id/mbl_lblsignout"
             android:title="Sign Out" />
     </group>
 </menu>

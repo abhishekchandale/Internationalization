@@ -1,7 +1,6 @@
 package com.oottru.internationalization.fragment
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,7 +12,7 @@ import android.widget.LinearLayout
 import com.google.gson.Gson
 import com.oottru.internationalization.R
 import com.oottru.internationalization.Util.Constants
-import com.oottru.internationalization.activity.LoginActivity
+import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.fragment.adapter.LanguagePrefAdapter
 import com.oottru.internationalization.model.LanguageModel
 import com.oottru.internationalization.model.TranslationsModel
@@ -23,13 +22,13 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class LanguagePrefFragment : Fragment() {
-
     private var mView: View? = null
     private var compositeDisposable: CompositeDisposable? = null
     private var progress: ProgressDialog? = null
     private var gson: Gson? = null
     private var language: ArrayList<LanguageModel>? = null
     private var recyclerView: RecyclerView? = null
+    private var prefs: Prefs? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_language, container, false)
@@ -44,6 +43,7 @@ class LanguagePrefFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = mView?.findViewById(R.id.language_recycler) as RecyclerView
         gson = Gson()
+        prefs = Prefs(this.activity!!)
         compositeDisposable = CompositeDisposable()
         languageApiCall()
     }
@@ -99,7 +99,10 @@ class LanguagePrefFragment : Fragment() {
 
     fun handleTranslationResponse(translationList: List<TranslationsModel>) {
         if (translationList.size > 0 && translationList != null) {
-            navigateToLogin(gson?.toJson(translationList)!!)
+            if (prefs?.isLogin == false)
+                navigateTo(SignInFragment.newInstance(), gson?.toJson(translationList)!!)
+            else
+                println("navigate to main")
         }
         if (progress != null) {
             progress?.dismiss()
@@ -113,12 +116,14 @@ class LanguagePrefFragment : Fragment() {
             progress?.dismiss()
             progress?.cancel()
         }
-
     }
 
-    fun navigateToLogin(json: String) {
-        val intent = Intent(activity, LoginActivity::class.java)
-        intent.putExtra(Constants.KEY_TRANSLATION_RESPONSE, json)
-        startActivity(intent)
+    private fun navigateTo(fragment: Fragment, response: String) {
+        var bundle = Bundle()
+        bundle.putString(Constants.KEY_TRANSLATION_RESPONSE, response)
+        fragment.arguments = bundle
+        fragmentManager?.beginTransaction()
+                ?.replace(R.id.container_login, fragment)?.commit()
     }
+
 }

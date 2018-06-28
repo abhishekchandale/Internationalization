@@ -1,6 +1,5 @@
 package com.oottru.internationalization.fragment.adapter
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,11 @@ import android.widget.TextView
 import com.oottru.internationalization.R
 import com.oottru.internationalization.fragment.LanguagePrefFragment
 import com.oottru.internationalization.model.LanguageModel
+import com.oottru.internationalization.service.ApiExecutor
 
 
 class LanguagePrefAdapter(val languageList: ArrayList<LanguageModel>, val context: LanguagePrefFragment) : RecyclerView.Adapter<LanguagePrefAdapter.ViewHolder>() {
-     val c: Context ?=null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguagePrefAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.fragment_language_item, parent, false)
         return ViewHolder(v)
@@ -38,6 +38,8 @@ class LanguagePrefAdapter(val languageList: ArrayList<LanguageModel>, val contex
             switchLanguage.setOnCheckedChangeListener(
                     CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
                         if (isChecked) {
+                            var api: ApiExecutor = ApiExecutor()
+                            //  api.translationApiCall(language.locale_code)
                             context.translationApiCall(language.locale_code)
                         } else {
 
@@ -45,5 +47,6 @@ class LanguagePrefAdapter(val languageList: ArrayList<LanguageModel>, val contex
                     })
         }
     }
+
 
 }

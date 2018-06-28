@@ -2,8 +2,8 @@ package com.oottru.internationalization.service
 
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.model.DummyDataModel
-import com.oottru.internationalization.model.DummyModel
 import com.oottru.internationalization.model.LanguageModel
+import com.oottru.internationalization.model.ProjectModel
 import com.oottru.internationalization.model.TranslationsModel
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -14,16 +14,12 @@ import retrofit2.http.Query
 
 interface ApiServiceInterface {
 
-    @GET("api.php")
-    fun hitCountCheck(@Query("action") action: String,
-                      @Query("format") format: String,
-                      @Query("list") list: String,
-                      @Query("srsearch") srsearch: String): Observable<DummyModel.Result>
-
 
     @GET("movies_2017.json")
     fun getImages(): Observable<List<DummyDataModel>>
 
+    @GET("projects")
+    fun getProjectList(): Observable<List<ProjectModel>>
 
     @GET("language")
     fun getLanguagePreferences(): Observable<List<LanguageModel>>

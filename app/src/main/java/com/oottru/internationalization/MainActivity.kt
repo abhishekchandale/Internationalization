@@ -1,6 +1,7 @@
 package com.oottru.internationalization
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -9,22 +10,33 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.activity.SettingsActivity
 import com.oottru.internationalization.fragment.LanguagePrefFragment
 import com.oottru.internationalization.fragment.ProjectDetailFragment
 import com.oottru.internationalization.fragment.ProjectListFragment
 import com.oottru.internationalization.fragment.SignInFragment
+import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    private var tempIntent: String? = null
+    private var gson: Gson? = null
+    private var translationModel: ArrayList<TranslationsModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        gson = Gson()
+        tempIntent = intent?.getStringExtra(Constants.KEY_TRANSLATION_RESPONSE)
         setSupportActionBar(toolbar)
         initNavigation()
+        if (tempIntent != null)
+            changeMenuText(tempIntent!!)
+        navigateTo(ProjectListFragment.newInstance())
     }
 
     private fun initNavigation() {
@@ -50,10 +62,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (Build.VERSION.SDK_INT > 11) {
+            invalidateOptionsMenu();
+            menu?.findItem(R.id.mbl_lblsignout)?.setVisible(false);
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
         val id = item.itemId
         if (id == R.id.action_settings) {
@@ -71,9 +88,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
+            R.id.mbl_lbl_home -> {
                 // Handle the camera action
                 //    toast("Click Camera")
 
@@ -94,7 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navigateTo(ProjectListFragment.newInstance())
 
             }
-            R.id.nav_gallery -> {
+            R.id.mbl_lbl_machinesetup -> {
                 //    toast("Nav gallery")
 
                 /*
@@ -104,21 +120,46 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navigateTo(ProjectDetailFragment.newInstance())
 
             }
-            R.id.nav_slideshow -> {
+            R.id.mbl_lbl_contactinfo -> {
 
             }
-            R.id.nav_manage -> {
-                drawer_layout!!.closeDrawers()
-            }
-            R.id.signout -> {
+            R.id.mbl_lblsignout -> {
                 navigateTo(SignInFragment.newInstance())
             }
-            R.id.language -> {
+            R.id.mbl_lbl_language -> {
                 navigateTo(LanguagePrefFragment.newInstance())
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun changeMenuText(translation: String) {
+        val listType = object : TypeToken<List<TranslationsModel>>() {}.type
+        if (translation == null) {
+            return
+        } else {
+            translationModel = gson?.fromJson(translation, listType)
+        }
+        val navigationView = findViewById(R.id.nav_view) as NavigationView
+        var menu: Menu = navigationView.getMenu()
+        if (translationModel != null) {
+            for (index in translationModel!!) {
+                if (Constants.MBL_LBL_MACHINESETUP == index.resource_key)
+                    menu.findItem(R.id.mbl_lbl_machinesetup).title = index.value
+                if (Constants.MBL_LBL_HOME == index.resource_key)
+                    menu.findItem(R.id.mbl_lbl_home).title = index.value
+                if (Constants.MBL_LBL_CONTACTINFO == index.resource_key)
+                    menu.findItem(R.id.mbl_lbl_contactinfo).title = index.value
+                if (Constants.MBL_LBL_LANGUAGE == index.resource_key)
+                    menu.findItem(R.id.mbl_lbl_language).title = index.value
+                if (Constants.MBL_LBLSIGNOUT == index.resource_key)
+                    menu.findItem(R.id.mbl_lblsignout).title = index.value
+            }
+
+        }
+
+
     }
 }

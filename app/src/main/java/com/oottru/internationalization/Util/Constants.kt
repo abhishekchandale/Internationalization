@@ -7,8 +7,16 @@ class Constants {
         //https://en.wikipedia.org/w/
         val KEY_TRANSLATION_RESPONSE = "translation"
         val KEY_DEFAULT_LANGUAGE_CODE = "en"
-        val lbl_email: String = "MBL_LBL_USERNAME";
-        val lbl_password: String = "lbl_password"
+        val LBL_USERNAME: String = "MBL_LBL_USERNAME";
+        val LBL_PASSWORD: String = "MBL_LBL_PASSWORD"
+        val BTN_SIGNIN: String = "MBL_BTN_LOGIN"
+        val MBL_LOGIN_HEAD: String = "MBL_LOGIN_HEAD"
+        val MBL_LBL_HOME: String = "MBL_LBL_HOME"
+        val MBL_LBL_MACHINESETUP: String = "MBL_LBL_MACHINESETUP"
+        val MBL_LBL_CONTACTINFO: String = "MBL_LBL_CONTACTINFO"
+        val MBL_LBL_PROFILE: String = "MBL_LBL_PROFILE"
+        val MBL_LBL_LANGUAGE: String = "MBL_LBL_LANGUAGE"
+        val MBL_LBLSIGNOUT: String = "MBL_LBLSIGNOUT"
 
     }
 
