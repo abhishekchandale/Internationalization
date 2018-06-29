@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.oottru.internationalization.R
+import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.fragment.adapter.ProjectListAdapter
 import com.oottru.internationalization.model.ProjectModel
 import com.oottru.internationalization.service.ApiServiceInterface
@@ -23,7 +24,8 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
     private var layoutManager: GridLayoutManager? = null
     private var compositeDisposable: CompositeDisposable? = null
     private var mArrayList: ArrayList<ProjectModel>? = null
-    private var progress:ProgressDialog?=null
+    private var progress: ProgressDialog? = null
+    private var prefs: Prefs? = null
 
     override lateinit var presenter: ProjectListContract.Presenter
 
@@ -50,6 +52,7 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
         super.onViewCreated(view, savedInstanceState)
         recycler = mView?.findViewById(R.id.recyclerView) as RecyclerView
         compositeDisposable = CompositeDisposable()
+        prefs = Prefs(this.activity!!)
         loadJSON()
     }
 
@@ -62,7 +65,7 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
                 activity!!, null,
                 "Loading... ", true
         )
-        compositeDisposable?.add(apiService.getProjectList()
+        compositeDisposable?.add(apiService.getProjectList(prefs?.language!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError))

@@ -18,6 +18,9 @@
             android:id="@+id/mbl_lbl_language"
             android:title="Language" />
         <item
+            android:id="@+id/mbl_lbl_profile"
+            android:title="Profile" />
+        <item
             android:id="@+id/mbl_lblsignout"
             android:title="Sign Out" />
     </group>

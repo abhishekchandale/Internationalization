@@ -14,10 +14,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.activity.SettingsActivity
-import com.oottru.internationalization.fragment.LanguagePrefFragment
-import com.oottru.internationalization.fragment.ProjectDetailFragment
-import com.oottru.internationalization.fragment.ProjectListFragment
-import com.oottru.internationalization.fragment.SignInFragment
+import com.oottru.internationalization.fragment.*
 import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -126,6 +123,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.mbl_lblsignout -> {
                 navigateTo(SignInFragment.newInstance())
             }
+            R.id.mbl_lbl_profile -> {
+                navigateTo(ProfileFragment.newInstance())
+            }
             R.id.mbl_lbl_language -> {
                 navigateTo(LanguagePrefFragment.newInstance())
             }
@@ -156,6 +156,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     menu.findItem(R.id.mbl_lbl_language).title = index.value
                 if (Constants.MBL_LBLSIGNOUT == index.resource_key)
                     menu.findItem(R.id.mbl_lblsignout).title = index.value
+                if (Constants.MBL_LBL_PROFILE == index.resource_key)
+                    menu.findItem(R.id.mbl_lbl_profile).title = index.value
             }
 
         }

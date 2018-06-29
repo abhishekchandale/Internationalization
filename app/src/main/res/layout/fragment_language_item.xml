@@ -25,14 +25,22 @@
     <!--android:src="@drawable/splashscreen_logo"-->
 
     <!--/>-->
-    <Switch
-        android:id="@+id/switch_language"
-        android:layout_width="100dp"
+    <!--<Switch-->
+    <!--android:id="@+id/switch_language"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:text="" />-->
+
+    <CheckBox
+        android:id="@+id/checkbox_language"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
-        android:text="" />
+        android:layout_marginRight="20dp" />
 
 
 </RelativeLayout>

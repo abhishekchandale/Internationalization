@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.google.gson.Gson
 import com.oottru.internationalization.R
 import com.oottru.internationalization.Util.Constants
@@ -29,6 +30,7 @@ class LanguagePrefFragment : Fragment() {
     private var language: ArrayList<LanguageModel>? = null
     private var recyclerView: RecyclerView? = null
     private var prefs: Prefs? = null
+    private var txSelectedLang: TextView? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_language, container, false)
@@ -42,10 +44,15 @@ class LanguagePrefFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = mView?.findViewById(R.id.language_recycler) as RecyclerView
+        txSelectedLang = mView?.findViewById(R.id.tx_selected_lang) as TextView
         gson = Gson()
         prefs = Prefs(this.activity!!)
+        if (prefs?.language != null) {
+            txSelectedLang!!.text = prefs?.language
+        }
         compositeDisposable = CompositeDisposable()
         languageApiCall()
+
     }
 
 
@@ -102,7 +109,7 @@ class LanguagePrefFragment : Fragment() {
             if (prefs?.isLogin == false)
                 navigateTo(SignInFragment.newInstance(), gson?.toJson(translationList)!!)
             else
-                println("navigate to main")
+                navigateTo(ProjectListFragment.newInstance(), "")
         }
         if (progress != null) {
             progress?.dismiss()
@@ -120,10 +127,18 @@ class LanguagePrefFragment : Fragment() {
 
     private fun navigateTo(fragment: Fragment, response: String) {
         var bundle = Bundle()
-        bundle.putString(Constants.KEY_TRANSLATION_RESPONSE, response)
-        fragment.arguments = bundle
-        fragmentManager?.beginTransaction()
-                ?.replace(R.id.container_login, fragment)?.commit()
+        if (response != ""){
+            bundle.putString(Constants.KEY_TRANSLATION_RESPONSE, response)
+            fragment.arguments = bundle
+        }
+        if(prefs?.isLogin == false){
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.container_login, fragment)?.commit()
+        }else{
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.contentFrame, fragment)?.commit()
+        }
+
     }
 
 }

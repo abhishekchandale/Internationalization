@@ -4,25 +4,40 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.Switch
+import android.widget.CheckBox
 import android.widget.TextView
 import com.oottru.internationalization.R
+import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.fragment.LanguagePrefFragment
 import com.oottru.internationalization.model.LanguageModel
-import com.oottru.internationalization.service.ApiExecutor
 
 
 class LanguagePrefAdapter(val languageList: ArrayList<LanguageModel>, val context: LanguagePrefFragment) : RecyclerView.Adapter<LanguagePrefAdapter.ViewHolder>() {
-
+    private var selectedPosition = -1
+    private var prefs: Prefs? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LanguagePrefAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.fragment_language_item, parent, false)
+        prefs = Prefs(parent.context)
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: LanguagePrefAdapter.ViewHolder, position: Int) {
-        holder.bindItems(languageList[position], context)
-
+        holder.textViewName.text = languageList.get(position).language
+        if (position == selectedPosition) {
+            holder.checkboxLanguage.setChecked(true);
+        } else {
+            holder.checkboxLanguage.setChecked(false)
+        }
+        holder.checkboxLanguage.setOnClickListener {
+            if (holder.checkboxLanguage.isChecked) {
+                selectedPosition = position
+                prefs?.language=languageList.get(position).locale_code
+                context.translationApiCall(languageList.get(position).locale_code)
+            } else {
+                selectedPosition = -1
+            }
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -30,23 +45,9 @@ class LanguagePrefAdapter(val languageList: ArrayList<LanguageModel>, val contex
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bindItems(language: LanguageModel, context: LanguagePrefFragment) {
-            val textViewName = itemView.findViewById(R.id.tx_language) as TextView
-            val switchLanguage = itemView.findViewById(R.id.switch_language) as Switch
-            textViewName.text = language.language
-            switchLanguage.setOnCheckedChangeListener(
-                    CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-                        if (isChecked) {
-                            var api: ApiExecutor = ApiExecutor()
-                            //  api.translationApiCall(language.locale_code)
-                            context.translationApiCall(language.locale_code)
-                        } else {
-
-                        }
-                    })
-        }
+        val textViewName = itemView.findViewById(R.id.tx_language) as TextView
+        //val switchLanguage = itemView.findViewById(R.id.switch_language) as Switch
+        val checkboxLanguage = itemView.findViewById(R.id.checkbox_language) as CheckBox
     }
-
 
 }
