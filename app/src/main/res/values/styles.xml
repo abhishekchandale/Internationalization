@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="spinnerStyle">@style/Widget.App.Spinner</item>
+        <item name="android:spinnerStyle">@style/Widget.App.Spinner</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -21,5 +23,8 @@
         <!--<item name="android:textColorPrimaryDisableOnly">#00838f</item>-->
         <!--<item name="colorAccent">#e91e63</item>-->
     <!--</style>-->
-
+    <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="overlapAnchor">true</item>
+        <item name="android:background">@drawable/sppinner_bg</item>
+    </style>
 </resources>
