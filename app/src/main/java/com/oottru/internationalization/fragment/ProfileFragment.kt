@@ -16,6 +16,7 @@ import android.widget.LinearLayout
 import android.widget.Spinner
 import com.google.gson.Gson
 import com.oottru.internationalization.R
+import com.oottru.internationalization.Util.Common
 import com.oottru.internationalization.Util.CreateViewElement
 import com.oottru.internationalization.model.ProfileModel
 import com.oottru.internationalization.service.ApiServiceInterface
@@ -57,7 +58,12 @@ class ProfileFragment : Fragment() {
         mCreatView = CreateViewElement(this.activity!!)
         compositeDisposable = CompositeDisposable()
         gson = Gson()
-        profileApiCall()
+        if (Common.isNetworkAvailable(this.activity!!)) {
+            profileApiCall()
+        } else {
+
+        }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -75,7 +81,7 @@ class ProfileFragment : Fragment() {
             if (CreateViewElement.KEY_DROP_DOWN == index.ctl_type) {
                 localView = mCreatView?.getItemViewType(CreateViewElement.KEY_DROP_DOWN)
                 localView as Spinner
-                localView.background=(this.resources.getDrawable(R.drawable.edittext_default_bg))
+//                localView.background = (this.resources.getDrawable(R.drawable.edittext_default_bg))
                 var temp = (Arrays.asList((index.ctl_value).split(","))).get(0)
                 dropDownList = ArrayList()
                 dropDownList?.addAll(temp)
