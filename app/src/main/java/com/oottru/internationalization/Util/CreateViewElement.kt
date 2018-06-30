@@ -57,6 +57,13 @@ class CreateViewElement constructor(val context: Context) {
             v = spinner
         }
 
+        if (KEY_DATE == type) {
+            val datePicker = DatePicker(context)
+            datePicker.layoutParams = layoutParams
+            datePicker.id = Random().nextInt()
+            v = datePicker
+        }
+
         return v!!
     }
 

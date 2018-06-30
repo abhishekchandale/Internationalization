@@ -106,6 +106,7 @@ class LanguagePrefFragment : Fragment() {
 
     fun handleTranslationResponse(translationList: List<TranslationsModel>) {
         if (translationList.size > 0 && translationList != null) {
+            prefs?.transaltion = gson?.toJson(translationList)!!
             if (prefs?.isLogin == false)
                 navigateTo(SignInFragment.newInstance(), gson?.toJson(translationList)!!)
             else
@@ -127,14 +128,14 @@ class LanguagePrefFragment : Fragment() {
 
     private fun navigateTo(fragment: Fragment, response: String) {
         var bundle = Bundle()
-        if (response != ""){
+        if (response != "") {
             bundle.putString(Constants.KEY_TRANSLATION_RESPONSE, response)
             fragment.arguments = bundle
         }
-        if(prefs?.isLogin == false){
+        if (prefs?.isLogin == false) {
             fragmentManager?.beginTransaction()
                     ?.replace(R.id.container_login, fragment)?.commit()
-        }else{
+        } else {
             fragmentManager?.beginTransaction()
                     ?.replace(R.id.contentFrame, fragment)?.commit()
         }

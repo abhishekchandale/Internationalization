@@ -22,6 +22,7 @@ import com.oottru.internationalization.service.ApiServiceInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 
 class SignInFragment : Fragment() {
@@ -123,7 +124,8 @@ class SignInFragment : Fragment() {
                     edPassword?.hint = index.value
                 }
                 if (Constants.BTN_SIGNIN.toLowerCase() == index.resource_key.toLowerCase()) {
-                    btnLogin?.text = index.value
+                   // btnLogin?.text = index.value
+                    mbl_btn_login.setText(index.value)
 
                 }
                 if (Constants.MBL_LOGIN_HEAD.toLowerCase() == index.resource_key.toLowerCase()) {

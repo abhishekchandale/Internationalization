@@ -9,6 +9,7 @@ class Prefs(context: Context) {
     val BACKGROUND_COLOR = "background_color"
     var ISLOGIN = "islogin"
     var LANGUAGE = "language"
+    var TRANSALATION = "translation"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
     var bgColor: Int
@@ -21,4 +22,7 @@ class Prefs(context: Context) {
     var language: String
         get() = prefs.getString(LANGUAGE, "EN")
         set(value) = prefs.edit().putString(LANGUAGE, value).apply()
+    var transaltion: String
+        get() = prefs.getString(TRANSALATION, "")
+        set(value) = prefs.edit().putString(TRANSALATION, value).apply()
 }

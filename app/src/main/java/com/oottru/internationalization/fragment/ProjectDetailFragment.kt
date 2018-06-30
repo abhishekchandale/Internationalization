@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.oottru.internationalization.R
 import com.oottru.internationalization.Util.Constants
+import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.model.ProjectModel
+import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_project_list_detail.*
 import kotlinx.android.synthetic.main.widget_detail_basicskills_view.*
@@ -26,6 +28,8 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
     var tempIntent: String? = null
     var model: ProjectModel? = null
     var gson: Gson? = null
+    private var transaltionObj: ArrayList<TranslationsModel>? = null
+    private var prefs: Prefs? = null
 
     override fun onResume() {
         super.onResume()
@@ -44,13 +48,21 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
         super.onViewCreated(view, savedInstanceState)
         tempIntent = arguments?.getString(Constants.KEY_DETAIL_RESPONSE)
         gson = Gson()
+        prefs = Prefs(this.activity!!)
         model = gson?.fromJson(tempIntent, ProjectModel::class.java)
-
+        val listType = object : TypeToken<List<TranslationsModel>>() {}.type
+        transaltionObj = gson?.fromJson(prefs?.transaltion, listType)
         Glide.with(this).load(model?.picture)
                 .into(expandedImage)
+        for (index in transaltionObj!!) {
+            if (Constants.PROJECT_DETAIL_PROJECT_NAME.toLowerCase() == index.resource_key.toLowerCase()) {
+                project_item_txt.setText(index.value)
+            }
+
+            //TODO
+        }
 
 
-        project_item_txt.setText(model?.name)
         detail_difficulty.setText(model?.complexity)
         detail_duration.setText(model?.duration)
         //detail_project_quote.setText(model?.)
@@ -63,8 +75,7 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
         detail_other_material_title.setText(model?.everything_else_title)
         detail_other_materials.setText(model?.everything_else_value)
         detail_backskills_title.setText(model?.prepariton_title)
-        item_price.text= model?.price.toString()
-
+        item_price.text = model?.price.toString()
 
 
         // textView1.text = "Fragment 2 Loaded"
