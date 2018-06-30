@@ -78,7 +78,7 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
             progress?.cancel()
         }
         mArrayList = ArrayList(androidList)
-        val adapter = ProjectListAdapter(mArrayList!!, this.activity!!)
+        val adapter = ProjectListAdapter(mArrayList!!, this)
         layoutManager = GridLayoutManager(this.activity!!, 2, GridLayoutManager.VERTICAL, false)
         recycler?.layoutManager = layoutManager
         recycler?.setAdapter(adapter)

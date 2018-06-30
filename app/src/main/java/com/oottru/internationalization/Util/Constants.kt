@@ -6,6 +6,7 @@ class Constants {
         val baseUrl: String = "http://54.149.178.226/api/"
         //https://en.wikipedia.org/w/
         val KEY_TRANSLATION_RESPONSE = "translation"
+        var KEY_DETAIL_RESPONSE="detailresponse"
         val KEY_DEFAULT_LANGUAGE_CODE = "en"
         val LBL_USERNAME: String = "MBL_LBL_USERNAME";
         val LBL_PASSWORD: String = "MBL_LBL_PASSWORD"
@@ -17,6 +18,7 @@ class Constants {
         val MBL_LBL_PROFILE: String = "MBL_LBL_PROFILE"
         val MBL_LBL_LANGUAGE: String = "MBL_LBL_LANGUAGE"
         val MBL_LBLSIGNOUT: String = "MBL_LBLSIGNOUT"
+        val PROJECT_DETAIL_PROJECT_NAME:String="PROJECT_DETAIL_PROJECT_NAME"
 
     }
 

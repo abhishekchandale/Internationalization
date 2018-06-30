@@ -12,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.oottru.internationalization.R.id.*
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.activity.SettingsActivity
 import com.oottru.internationalization.fragment.*
