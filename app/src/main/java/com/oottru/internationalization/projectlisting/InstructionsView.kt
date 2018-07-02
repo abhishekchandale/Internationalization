@@ -7,11 +7,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.oottru.internationalization.R
 
 class InstructionsView : LinearLayout {
 
-    private var recyclerView: RecyclerView? = null
+    private var cutTitle: TextView? = null
+    private var cutValue: TextView? = null
+
+
     private var layoutManager: LinearLayoutManager? = null
 
     constructor(context: Context) : super(context) {}
@@ -26,20 +30,11 @@ class InstructionsView : LinearLayout {
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        recyclerView = findViewById(R.id.detail_instructions_list)
-        recyclerView!!.setHasFixedSize(true)
-        layoutManager = object : LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false) {
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
+
+
+        cutTitle = findViewById(R.id.detail_cut_tittle)
+        cutValue = findViewById(R.id.detail_cut_value)
         }
-        recyclerView!!.layoutManager = layoutManager
-        recyclerView!!.isFocusable = false
     }
 
-    /*fun bindInstructions(detail: PBProjectDetail) {
-        val adapter = DetailInstructionsAdapter(context, detail.getInstructions().getSectionsList(),
-                detail.getPrintInstructionsList())
-        recyclerView!!.adapter = adapter
-    }*/
-}
+

@@ -36,53 +36,10 @@ class MaterialView : PercentRelativeLayout {
         super.onFinishInflate()
 
         materialTitle = findViewById(R.id.detail_material_title)
-        otherMaterialTitle = findViewById(R.id.detail_other_material_title)
         materials = findViewById(R.id.detail_materials)
-        otherMaterials = findViewById(R.id.detail_other_materials)
         materialSegment = findViewById(R.id.detail_material_segment)
-        otherMaterialSegment = findViewById(R.id.detail_other_material_segment)
-        materialTipLayout = findViewById(R.id.material_tip_layout)
-        materialTipText = findViewById(R.id.material_tips)
+
 
     }
 
-/*
-    fun bindMaterial(detail: PBProjectDetail) {
-
-        var sb = StringBuilder()
-        val cricutCuts = detail.getMaterialsUsed().getCricutCutList()
-        for (cut in cricutCuts) {
-            sb.append("\u2022 ").append(Html.fromHtml(cut.getName())).append("\n")
-        }
-        val otherCut = detail.getMaterialsUsed().getOtherCutList()
-        for (cut in otherCut) {
-            sb.append("\u2022 ").append(Html.fromHtml(cut)).append("\n")
-        }
-        if (sb.toString().isEmpty()) {
-            this.materialSegment!!.visibility = View.GONE
-        } else {
-            this.materials!!.text = sb.toString()
-        }
-
-        sb = StringBuilder()
-        val cricutOthers = detail.getMaterialsUsed().getCricutOtherList()
-        for (material in cricutOthers) {
-            sb.append("\u2022 ").append(Html.fromHtml(material.getName())).append("\n")
-        }
-        val materials = detail.getMaterialsUsed().getOtherOtherList()
-        for (material in materials) {
-            sb.append("\u2022 ").append(Html.fromHtml(material)).append("\n")
-        }
-        if (sb.toString().isEmpty()) {
-            this.otherMaterialSegment!!.visibility = View.GONE
-        } else {
-            this.otherMaterials!!.text = sb.toString()
-        }
-
-        val materialTip = detail.getMaterialsUsed().getMaterialTip().getName()
-        if (!materialTip.isEmpty()) {
-            materialTipLayout!!.visibility = View.VISIBLE
-            materialTipText!!.setText(materialTip)
-        }
-    }*/
 }

@@ -14,12 +14,14 @@ import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.model.ProjectModel
 import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.bottom_sheet.*
+import kotlinx.android.synthetic.main.everythingelse_view.*
 import kotlinx.android.synthetic.main.fragment_project_list_detail.*
-import kotlinx.android.synthetic.main.widget_detail_basicskills_view.*
 import kotlinx.android.synthetic.main.widget_detail_description_view.*
 import kotlinx.android.synthetic.main.widget_detail_finished_size_view.*
 import kotlinx.android.synthetic.main.widget_detail_header_view.*
+import kotlinx.android.synthetic.main.widget_detail_instructions_view.*
 import kotlinx.android.synthetic.main.widget_detail_material_view.*
+import kotlinx.android.synthetic.main.widget_preperation_view.*
 
 
 class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
@@ -54,27 +56,33 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
         transaltionObj = gson?.fromJson(prefs?.transaltion, listType)
         Glide.with(this).load(model?.picture)
                 .into(expandedImage)
+
         for (index in transaltionObj!!) {
             if (Constants.PROJECT_DETAIL_PROJECT_NAME.toLowerCase() == index.resource_key.toLowerCase()) {
-                project_item_txt.setText(index.value)
+                //   project_item_txt.setText(index.value)
+            }
+            if (Constants.PROJECT_DETAIL_PROJECT_NAME.toLowerCase() == index.resource_key.toLowerCase()) {
+
             }
 
             //TODO
         }
 
-
+        project_item_txt.setText(model?.name)
         detail_difficulty.setText(model?.complexity)
         detail_duration.setText(model?.duration)
-        //detail_project_quote.setText(model?.)
         detail_description_title.setText(model?.desc_title)
         detail_description.setText(model?.desc_value)
         detail_finishedsize_title.setText(model?.finished_size_title)
         detail_finishedsize.setText(model?.finished_size_value)
         detail_material_title.setText(model?.materials_cut_title)
         detail_materials.setText(model?.materials_cut_value)
-        detail_other_material_title.setText(model?.everything_else_title)
-        detail_other_materials.setText(model?.everything_else_value)
-        detail_backskills_title.setText(model?.prepariton_title)
+        detail_everythingl_title.setText(model?.everything_else_title)
+        detail_everythingelse.setText(model?.everything_else_value)
+        detail_cut_tittle.setText(model?.cut_title)
+        detail_cut_value.setText(model?.cut_value)
+        detail_preperation_title.setText(model?.prepariton_title)
+        detail_preperation_value.setText(model?.prepariton_value)
         item_price.text = model?.price.toString()
 
 
