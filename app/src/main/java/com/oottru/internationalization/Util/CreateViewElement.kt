@@ -19,7 +19,7 @@ class CreateViewElement constructor(val context: Context) {
     companion object {
         const val KEY_EDIT_TEXT: String = "inputText"
         const val KEY_TEXT_VIEW: String = "tx"
-        const val KEY_BUTTON: String = "btn"
+        const val KEY_BUTTON: String = "button"
         const val KEY_DROP_DOWN: String = "dropdown"
         const val KEY_DATE: String = "date"
     }
@@ -48,6 +48,7 @@ class CreateViewElement constructor(val context: Context) {
             val button = Button(context)
             button.layoutParams = layoutParams
             button.id = Random().nextInt()
+            button.setBackgroundResource(R.color.colorAccent)
             v = button
         }
         if (KEY_DROP_DOWN == type) {

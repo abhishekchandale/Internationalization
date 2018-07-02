@@ -1,6 +1,5 @@
 package com.oottru.internationalization.fragment
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.ProgressDialog
@@ -38,7 +37,6 @@ class ProfileFragment : Fragment() {
     private var dropDownList: ArrayList<String>? = null
     private var editable: Editable? = null
     private var myCalendar: Calendar? = null
-    private var datePickerFragment: DialogFragment? = null
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -71,6 +69,10 @@ class ProfileFragment : Fragment() {
         for (index in profile) {
             try {
                 if (CreateViewElement.KEY_EDIT_TEXT == index.ctl_type) {
+                    localView = mCreatView?.getItemViewType(CreateViewElement.KEY_TEXT_VIEW)
+                    localView as TextView
+                    localView.setText(index.ctl_lable)
+                    mChildLayout?.addView(localView)
                     localView = mCreatView?.getItemViewType(CreateViewElement.KEY_EDIT_TEXT)
                     localView as EditText
                     localView.hint = index.ctl_lable!!
@@ -79,6 +81,10 @@ class ProfileFragment : Fragment() {
                     mChildLayout?.addView(localView)
                 }
                 if (CreateViewElement.KEY_DROP_DOWN == index.ctl_type) {
+                    localView = mCreatView?.getItemViewType(CreateViewElement.KEY_TEXT_VIEW)
+                    localView as TextView
+                    localView.setText(index.ctl_lable)
+                    mChildLayout?.addView(localView)
                     localView = mCreatView?.getItemViewType(CreateViewElement.KEY_DROP_DOWN)
                     localView as Spinner
                     localView.setBackgroundResource(R.drawable.sppinner_bg)
@@ -93,34 +99,28 @@ class ProfileFragment : Fragment() {
                     myCalendar = Calendar.getInstance()
                     val myFormat = "MM/dd/yy" //In which you need put here
                     val sdf = SimpleDateFormat(myFormat, Locale.US)
+                    localView = mCreatView?.getItemViewType(CreateViewElement.KEY_TEXT_VIEW)
+                    localView as TextView
+                    localView.setText(index.ctl_lable)
+                    mChildLayout?.addView(localView)
                     localView = mCreatView?.getItemViewType(CreateViewElement.KEY_EDIT_TEXT)
                     localView as EditText
+                    localView.hint = index.ctl_lable
+                    localView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_date_range, 0);
                     editable = SpannableStringBuilder(sdf.format(myCalendar?.time))
-//                    localView.text = editable
-                    //localView.text = (editable)
-//                    localView.setOnClickListener {
-//                        DatePickerDialog(context, getDate(), myCalendar!!
-//                                .get(Calendar.YEAR), myCalendar!!.get(Calendar.MONTH),
-//                                myCalendar!!.get(Calendar.DAY_OF_MONTH)).show()
-//                    }
-
-                    localView.setOnFocusChangeListener { v, focus ->
-                        if (focus) {
-                            val datePickerFragment = @SuppressLint("ValidFragment")
-                            object : DatePickerFragment() {
-                                override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-                                    val c = Calendar.getInstance()
-                                    c.set(year, month, day)
-                                    //  localView.setText(sdf.format(c.time))
-                                }
-                            }
-                            datePickerFragment.show(this.activity!!.supportFragmentManager, "datePicker")
-                        }
-
+                    localView.isFocusable = false
+                    val datePicker = DatePickerFragment()
+                    localView.setOnClickListener {
+                        datePicker.show(fragmentManager, "DatePickerFragment")
                     }
                     mChildLayout?.addView(localView)
                 }
-
+                if (CreateViewElement.KEY_BUTTON == index.ctl_type) {
+                    localView = mCreatView?.getItemViewType(CreateViewElement.KEY_BUTTON)
+                    localView as Button
+                    localView.setText(index.ctl_value)
+                    mChildLayout?.addView(localView)
+                }
             } catch (ex: Exception) {
                 println("Exception :${ex.message}")
             }
@@ -158,23 +158,23 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
     open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            // Use the current date as the default date in the picker
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-
-            // Create a new instance of DatePickerDialog and return it
-            return DatePickerDialog(this.activity!!, this, year, month, day)
+            val dialog = DatePickerDialog(activity!!, this, year, month, day)
+            dialog.datePicker.maxDate = c.timeInMillis
+            return dialog
         }
 
-        override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
+        override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+            //  btnDate.setText(ConverterDate.ConvertDate(year, month + 1, day))
+            println("Convert date ${year}+${day}")
         }
-
     }
+
+
 }
