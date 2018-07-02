@@ -15,7 +15,10 @@ import com.google.gson.reflect.TypeToken
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.activity.SettingsActivity
-import com.oottru.internationalization.fragment.*
+import com.oottru.internationalization.fragment.ChangeLanguageFragment
+import com.oottru.internationalization.fragment.ProfileFragment
+import com.oottru.internationalization.fragment.ProjectDetailFragment
+import com.oottru.internationalization.fragment.ProjectListFragment
 import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -121,12 +124,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.mbl_lbl_machinesetup -> {
-                //    toast("Nav gallery")
-
-                /*
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.contentFrame, ProjectDetailFragment.newInstance()).commit()
-                */
                 navigateTo(ProjectDetailFragment.newInstance())
 
             }
@@ -134,7 +131,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.mbl_lblsignout -> {
-                navigateTo(SignInFragment.newInstance())
+              //  navigateTo(SignInFragment.newInstance())
             }
             R.id.mbl_lbl_profile -> {
                 navigateTo(ProfileFragment.newInstance())

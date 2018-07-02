@@ -9,9 +9,11 @@
             android:title="Home" />
         <item
             android:id="@+id/mbl_lbl_machinesetup"
+            android:visible="false"
             android:title="" />
         <item
             android:id="@+id/mbl_lbl_contactinfo"
+            android:visible="false"
             android:title="Contact Info" />
 
         <item
