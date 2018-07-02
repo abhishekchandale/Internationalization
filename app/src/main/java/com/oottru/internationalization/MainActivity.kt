@@ -21,7 +21,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ChangeLanguageFragment.LanguageChangeListener {
+
+
+    override fun updateLanguage(l: String) {
+        var prefs: Prefs = Prefs(this)
+        changeMenuText(prefs?.transaltion)
+    }
+
+
     private var tempIntent: String? = null
     private var gson: Gson? = null
     private var translationModel: ArrayList<TranslationsModel>? = null
@@ -89,6 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        println("onNavigation changed call")
         when (item.itemId) {
             R.id.mbl_lbl_home -> {
                 // Handle the camera action
@@ -131,7 +140,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 navigateTo(ProfileFragment.newInstance())
             }
             R.id.mbl_lbl_language -> {
-                navigateTo(LanguagePrefFragment.newInstance())
+                navigateTo(ChangeLanguageFragment.newInstance())
             }
         }
 
@@ -166,6 +175,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
-
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.oottru.internationalization.fragment
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ import com.oottru.internationalization.R
 import com.oottru.internationalization.Util.Common
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
-import com.oottru.internationalization.fragment.adapter.LanguagePrefAdapter
+import com.oottru.internationalization.fragment.adapter.ChangeLanguageAdapter
 import com.oottru.internationalization.model.LanguageModel
 import com.oottru.internationalization.model.TranslationsModel
 import com.oottru.internationalization.service.ApiServiceInterface
@@ -23,7 +24,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LanguagePrefFragment : Fragment() {
+
+class ChangeLanguageFragment : Fragment() {
     private var mView: View? = null
     private var compositeDisposable: CompositeDisposable? = null
     private var progress: ProgressDialog? = null
@@ -32,6 +34,7 @@ class LanguagePrefFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var prefs: Prefs? = null
     private var txSelectedLang: TextView? = null
+    lateinit var listener: LanguageChangeListener
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_language, container, false)
@@ -42,6 +45,14 @@ class LanguagePrefFragment : Fragment() {
         ApiServiceInterface.create()
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context is LanguageChangeListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context!!.toString() + " must implement LanguageChangeListener")
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +74,7 @@ class LanguagePrefFragment : Fragment() {
 
 
     companion object {
-        fun newInstance() = LanguagePrefFragment()
+        fun newInstance() = ChangeLanguageFragment()
     }
 
     fun languageApiCall() {
@@ -83,12 +94,10 @@ class LanguagePrefFragment : Fragment() {
             progress?.cancel()
         }
         if (languageList.size > 0 && languageList != null) {
-            // listener?.updateLanguage("laguage updated !!")
             language = ArrayList(languageList)
-            val adapter = LanguagePrefAdapter(language!!, this)
+            val adapter = ChangeLanguageAdapter(language!!, this)
             recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
             recyclerView?.setAdapter(adapter)
-
         }
     }
 
@@ -114,8 +123,12 @@ class LanguagePrefFragment : Fragment() {
     fun handleTranslationResponse(translationList: List<TranslationsModel>) {
         if (translationList.size > 0 && translationList != null) {
             prefs?.transaltion = gson?.toJson(translationList)!!
-            if (prefs?.isLogin == false)
+            if (prefs?.isLogin == false) {
                 navigateTo(SignInFragment.newInstance(), gson?.toJson(translationList)!!)
+            } else {
+                navigateTo(ProjectListFragment.newInstance(), "")
+                listener.updateLanguage(gson?.toJson(translationList)!!)
+            }
         }
         if (progress != null) {
             progress?.dismiss()
@@ -136,10 +149,15 @@ class LanguagePrefFragment : Fragment() {
         if (response != "") {
             bundle.putString(Constants.KEY_TRANSLATION_RESPONSE, response)
             fragment.arguments = bundle
-        }
+        } else {
             fragmentManager?.beginTransaction()
-                    ?.replace(R.id.container_login, fragment)?.commit()
+                    ?.replace(R.id.contentFrame, fragment)?.commit()
+        }
+
     }
 
+    interface LanguageChangeListener {
+        fun updateLanguage(l: String)
+    }
 
 }
