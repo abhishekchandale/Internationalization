@@ -8,25 +8,34 @@
         android:id="@+id/layout_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:gravity="center">
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Profile page"
             android:textColor="@color/detail_label_medium_font_color"
             android:textSize="22dp"
-            android:textStyle="bold"
-            android:text="Profile page"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_child"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical"></LinearLayout>
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="50px"
+        android:layout_weight="1"
+        android:clickable="true">
 
+        <LinearLayout
+            android:id="@+id/layout_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
 </LinearLayout>

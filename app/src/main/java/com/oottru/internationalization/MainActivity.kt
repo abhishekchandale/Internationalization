@@ -12,8 +12,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.oottru.internationalization.R.id.*
 import com.oottru.internationalization.Util.Constants
+import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.activity.SettingsActivity
 import com.oottru.internationalization.fragment.*
 import com.oottru.internationalization.model.TranslationsModel
@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var tempIntent: String? = null
     private var gson: Gson? = null
     private var translationModel: ArrayList<TranslationsModel>? = null
+    private var prefs: Prefs? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,8 +33,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         tempIntent = intent?.getStringExtra(Constants.KEY_TRANSLATION_RESPONSE)
         setSupportActionBar(toolbar)
         initNavigation()
-        if (tempIntent != null)
-            changeMenuText(tempIntent!!)
+        prefs = Prefs(this)
+        changeMenuText(prefs?.transaltion!!)
+//        if (tempIntent != null)
+//            changeMenuText(tempIntent!!)
         navigateTo(ProjectListFragment.newInstance())
     }
 
