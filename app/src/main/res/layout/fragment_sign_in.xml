@@ -38,8 +38,7 @@
             android:id="@+id/signin_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Use your Cricut ID for everything you do with Cricut" />
+            android:gravity="center" />
 
     </LinearLayout>
 
@@ -61,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Sign in with your Cricut ID"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -109,7 +107,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:padding="10dp">
 
         <Button
@@ -120,7 +117,6 @@
             android:layout_marginTop="60dp"
             android:background="@color/detail_label_medium_font_color"
             android:padding="10dp"
-            android:text="Sign In"
             android:textColor="@color/white"
 
             />

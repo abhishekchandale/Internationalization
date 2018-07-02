@@ -4,7 +4,8 @@ class Constants {
 
     companion object {
         val baseUrl: String = "http://54.149.178.226/api/"
-        //https://en.wikipedia.org/w/
+        var APPLICATION_LABEL = "APPLICATION_LABEL"
+        var PROJECT_SINGIN_MESSAGE = "PROJECT_SINGIN_MESSAGE"
         val KEY_TRANSLATION_RESPONSE = "translation"
         var KEY_DETAIL_RESPONSE = "detailresponse"
         val KEY_DEFAULT_LANGUAGE_CODE = "en"

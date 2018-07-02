@@ -115,6 +115,11 @@ class SignInFragment : Fragment() {
         }
         if (translationsList != null) {
             for (index in translationsList!!) {
+
+                if (Constants.PROJECT_SINGIN_MESSAGE.toLowerCase() == index.resource_key.toLowerCase()) {
+                    signin_msg?.text = index.value
+
+                }
                 if (Constants.LBL_USERNAME.toLowerCase() == index.resource_key.toLowerCase()) {
                     lblEmail?.text = index.value
                     edEmail?.hint = index.value
@@ -124,7 +129,6 @@ class SignInFragment : Fragment() {
                     edPassword?.hint = index.value
                 }
                 if (Constants.BTN_SIGNIN.toLowerCase() == index.resource_key.toLowerCase()) {
-                   // btnLogin?.text = index.value
                     mbl_btn_login.setText(index.value)
 
                 }
