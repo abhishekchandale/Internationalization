@@ -37,6 +37,7 @@ class ProfileFragment : Fragment() {
     private var dropDownList: ArrayList<String>? = null
     private var editable: Editable? = null
     private var myCalendar: Calendar? = null
+    private var etDate: EditText? = null
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -105,10 +106,11 @@ class ProfileFragment : Fragment() {
                     mChildLayout?.addView(localView)
                     localView = mCreatView?.getItemViewType(CreateViewElement.KEY_EDIT_TEXT)
                     localView as EditText
+                    etDate = localView
                     localView.hint = index.ctl_lable
                     localView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_date_range, 0);
-                    editable = SpannableStringBuilder(sdf.format(myCalendar?.time))
                     localView.isFocusable = false
+                    //editable = SpannableStringBuilder()
                     val datePicker = DatePickerFragment()
                     localView.setOnClickListener {
                         datePicker.show(fragmentManager, "DatePickerFragment")
@@ -171,8 +173,7 @@ class ProfileFragment : Fragment() {
         }
 
         override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-            //  btnDate.setText(ConverterDate.ConvertDate(year, month + 1, day))
-            println("Convert date ${year}+${day}")
+            val date = "${month + 1}/${day}/${year}"
         }
     }
 
