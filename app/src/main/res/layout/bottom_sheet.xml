@@ -14,8 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
         android:weightSum="5">
 
         <TextView
@@ -29,26 +29,26 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/btn_custom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_margin"
             android:layout_weight="2"
             android:gravity="right"
             android:textAlignment="gravity"
-            android:text="Order Details"
             android:textColor="@android:color/holo_green_light"
             android:textSize="18dp"
             android:textStyle="bold" />
 
 
         <TextView
+            android:id="@+id/btn_makeit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_margin"
             android:layout_weight="2"
             android:gravity="right"
             android:textAlignment="gravity"
-            android:text="Make It"
             android:textColor="@android:color/holo_green_light"
             android:textSize="18dp"
             android:textStyle="bold" />
