@@ -35,7 +35,8 @@ class ChangeLanguageFragment : Fragment() {
     private var prefs: Prefs? = null
     private var txSelectedLang: TextView? = null
     lateinit var listener: LanguageChangeListener
-
+    private var languageMasterList: List<LanguageModel>? = null
+    private var translationApiResponse: TranslationApiResponse? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_language, container, false)
@@ -66,7 +67,7 @@ class ChangeLanguageFragment : Fragment() {
         }
         compositeDisposable = CompositeDisposable()
         if (Common.isNetworkAvailable(this.activity!!)) {
-            languageApiCall()
+            loadLanguageMaster()
         } else {
 
         }
@@ -78,37 +79,56 @@ class ChangeLanguageFragment : Fragment() {
         fun newInstance() = ChangeLanguageFragment()
     }
 
-    fun languageApiCall() {
+    fun loadLanguageMaster() {
         progress = ProgressDialog.show(
                 activity!!, null,
                 "Preparing... ", true
         )
-        compositeDisposable?.add(apiService.getLanguagePreferences()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleLanguageResponse, this::handleLanguageError))
-    }
-
-    fun handleLanguageResponse(languageList: List<LanguageModel>) {
-        if (progress != null) {
-            progress?.dismiss()
-            progress?.cancel()
-        }
-        if (languageList.size > 0 && languageList != null) {
-            language = ArrayList(languageList)
-            val adapter = ChangeLanguageAdapter(language!!, this)
+        translationApiResponse = gson?.fromJson(prefs?.transaltion, TranslationApiResponse::class.java)
+        languageMasterList = translationApiResponse?.Language_Master
+        if (languageMasterList?.size!! > 0 && languageMasterList != null) {
+            val adapter = ChangeLanguageAdapter(languageMasterList!!, this)
             recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
             recyclerView?.setAdapter(adapter)
         }
-    }
-
-    fun handleLanguageError(error: Throwable) {
-        println("Error ${error.localizedMessage}")
         if (progress != null) {
             progress?.dismiss()
             progress?.cancel()
         }
     }
+
+
+//    fun languageApiCall() {
+//        progress = ProgressDialog.show(
+//                activity!!, null,
+//                "Preparing... ", true
+//        )
+//        compositeDisposable?.add(apiService.getLanguagePreferences()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(this::handleLanguageResponse, this::handleLanguageError))
+//    }
+//
+//    fun handleLanguageResponse(languageList: List<LanguageModel>) {
+//        if (progress != null) {
+//            progress?.dismiss()
+//            progress?.cancel()
+//        }
+//        if (languageList.size > 0 && languageList != null) {
+//            language = ArrayList(languageList)
+//            val adapter = ChangeLanguageAdapter(language!!, this)
+//            recyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+//            recyclerView?.setAdapter(adapter)
+//        }
+//    }
+//
+//    fun handleLanguageError(error: Throwable) {
+//        println("Error ${error.localizedMessage}")
+//        if (progress != null) {
+//            progress?.dismiss()
+//            progress?.cancel()
+//        }
+//    }
 
     fun translationApiCall(code: String) {
         progress = ProgressDialog.show(

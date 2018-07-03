@@ -12,7 +12,7 @@ import com.oottru.internationalization.fragment.ChangeLanguageFragment
 import com.oottru.internationalization.model.LanguageModel
 
 
-class ChangeLanguageAdapter(val languageList: ArrayList<LanguageModel>, val context: ChangeLanguageFragment) : RecyclerView.Adapter<ChangeLanguageAdapter.ViewHolder>() {
+class ChangeLanguageAdapter(val languageList: List<LanguageModel>, val context: ChangeLanguageFragment) : RecyclerView.Adapter<ChangeLanguageAdapter.ViewHolder>() {
     private var selectedPosition = -1
     private var prefs: Prefs? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChangeLanguageAdapter.ViewHolder {
