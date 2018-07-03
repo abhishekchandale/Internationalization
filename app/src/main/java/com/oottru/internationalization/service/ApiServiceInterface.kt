@@ -12,9 +12,6 @@ import retrofit2.http.Query
 interface ApiServiceInterface {
 
 
-    @GET("movies_2017.json")
-    fun getImages(): Observable<List<DummyDataModel>>
-
     @GET("projects")
     fun getProjectList(@Query("code") code: String): Observable<List<ProjectModel>>
 
@@ -26,6 +23,7 @@ interface ApiServiceInterface {
 
     @GET("profiles")
     fun getProfile(): Observable<List<ProfileModel>>
+
     companion object {
         fun create(): ApiServiceInterface {
 

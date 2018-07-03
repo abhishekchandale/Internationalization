@@ -8,7 +8,6 @@
     <string name="action_settings">Settings</string>
 
 
-
     <!-- Home screen start-->
     <string name="HOME_NEWPROJECT">New Project</string>
     <string name="HOME_MYPROJECTS">My Projects</string>
@@ -28,7 +27,6 @@
     <string name="PROJECT_DETAILS_SEARCH_IN_PARAMS">Search in %1$s</string>
     <string name="PROJECTS_LOADING_PLEASE_WAIT">Loading. Please wait…</string>
     <string name="PROJECTS_EXCLUSIVE">Exclusive</string>
-    <string name="skill_projectdetail_basicskills_text">Skills</string>
     <string name="PROJECT_DETAILS_LOADING_PROJECT">Loading Project…</string>
     <string name="PROJECT_DETAILS_SOMETHING_WENT_WRONG">Something Went Wrong</string>
     <string name="PROJECT_DETAILS_PROJECT_OPEN_UNSUCCESSFUL">Project Open Unsuccessful</string>
@@ -38,10 +36,9 @@
     <string name="PROJECT_DETAILS_NO_IMAGES_FOR_MAT_TO_LOAD">No images for mat to load</string>
 
 
-
-
     <!--Settings Screen-->
     <string name="title_activity_settings">Settings</string>
+    <string name="language">Language</string>
 
 
 </resources>

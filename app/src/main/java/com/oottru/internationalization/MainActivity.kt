@@ -40,9 +40,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         gson = Gson()
         tempIntent = intent?.getStringExtra(Constants.KEY_TRANSLATION_RESPONSE)
         setSupportActionBar(toolbar)
+        // toolbar.title=Constants.APPLICATION_LABEL
         initNavigation()
         prefs = Prefs(this)
         changeMenuText(prefs?.transaltion!!)
