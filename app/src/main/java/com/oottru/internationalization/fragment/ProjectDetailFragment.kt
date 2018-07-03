@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.oottru.internationalization.R
-import com.oottru.internationalization.R.id.*
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.model.ProjectModel
+import com.oottru.internationalization.model.TranslationApiResponse
 import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.everythingelse_view.*
@@ -31,7 +30,8 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
     var tempIntent: String? = null
     var model: ProjectModel? = null
     var gson: Gson? = null
-    private var transaltionObj: ArrayList<TranslationsModel>? = null
+    private var transaltionObj: List<TranslationsModel>? = null
+    private var translationApiResponse: TranslationApiResponse? = null
     private var prefs: Prefs? = null
 
     override fun onResume() {
@@ -53,8 +53,8 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
         gson = Gson()
         prefs = Prefs(this.activity!!)
         model = gson?.fromJson(tempIntent, ProjectModel::class.java)
-        val listType = object : TypeToken<List<TranslationsModel>>() {}.type
-        transaltionObj = gson?.fromJson(prefs?.transaltion, listType)
+        translationApiResponse = gson?.fromJson(prefs?.transaltion, TranslationApiResponse::class.java)
+        transaltionObj = translationApiResponse?.Translation_Masters
         Glide.with(this).load(model?.picture)
                 .into(expandedImage)
 

@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.activity.SettingsActivity
@@ -19,6 +18,7 @@ import com.oottru.internationalization.fragment.ChangeLanguageFragment
 import com.oottru.internationalization.fragment.ProfileFragment
 import com.oottru.internationalization.fragment.ProjectDetailFragment
 import com.oottru.internationalization.fragment.ProjectListFragment
+import com.oottru.internationalization.model.TranslationApiResponse
 import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var tempIntent: String? = null
     private var gson: Gson? = null
-    private var translationModel: ArrayList<TranslationsModel>? = null
+    private var translationModel: List<TranslationsModel>? = null
+    private var translationApiResponse: TranslationApiResponse? = null
     private var prefs: Prefs? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,7 +132,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.mbl_lblsignout -> {
-              //  navigateTo(SignInFragment.newInstance())
+                //  navigateTo(SignInFragment.newInstance())
             }
             R.id.mbl_lbl_profile -> {
                 navigateTo(ProfileFragment.newInstance())
@@ -146,11 +147,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun changeMenuText(translation: String) {
-        val listType = object : TypeToken<List<TranslationsModel>>() {}.type
+        ///   val listType = object : TypeToken<List<TranslationsModel>>() {}.type
         if (translation == null) {
             return
         } else {
-            translationModel = gson?.fromJson(translation, listType)
+            translationApiResponse = gson?.fromJson(translation, TranslationApiResponse::class.java)
+            translationModel = translationApiResponse?.Translation_Masters
         }
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         var menu: Menu = navigationView.getMenu()

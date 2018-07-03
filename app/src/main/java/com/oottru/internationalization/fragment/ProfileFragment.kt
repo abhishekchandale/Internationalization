@@ -1,12 +1,10 @@
 package com.oottru.internationalization.fragment
 
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
-import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.SpannableStringBuilder
@@ -37,7 +35,9 @@ class ProfileFragment : Fragment() {
     private var dropDownList: ArrayList<String>? = null
     private var editable: Editable? = null
     private var myCalendar: Calendar? = null
+    var dateSetListener: DatePickerDialog.OnDateSetListener? = null
     private var etDate: EditText? = null
+
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -105,16 +105,29 @@ class ProfileFragment : Fragment() {
                     localView.setText(index.ctl_lable)
                     mChildLayout?.addView(localView)
                     localView = mCreatView?.getItemViewType(CreateViewElement.KEY_EDIT_TEXT)
-                    localView as EditText
-                    etDate = localView
+                    etDate = localView as EditText
                     localView.hint = index.ctl_lable
                     localView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_date_range, 0);
                     localView.isFocusable = false
-                    //editable = SpannableStringBuilder()
-                    val datePicker = DatePickerFragment()
+                    //  val datePicker = DatePickerFragment()
+
                     localView.setOnClickListener {
-                        datePicker.show(fragmentManager, "DatePickerFragment")
+                        //datePicker.show(fragmentManager, "DatePickerFragment")
+                        DatePickerDialog(this.activity!!, dateSetListener,
+                                myCalendar?.get(Calendar.YEAR)!!.toInt(),
+                                myCalendar?.get(Calendar.MONTH)!!.toInt(),
+                                myCalendar?.get(Calendar.DAY_OF_MONTH)!!.toInt()).show()
                     }
+                    dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        myCalendar?.set(Calendar.YEAR, year)
+                        myCalendar?.set(Calendar.MONTH, monthOfYear)
+                        myCalendar?.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        editable = SpannableStringBuilder(sdf.format(myCalendar?.time))
+                        etDate?.text=editable
+                        println("EDITABLE ${editable.toString()}")
+                    }
+                    editable = SpannableStringBuilder(sdf.format(myCalendar?.time))
+                    localView?.text = editable
                     mChildLayout?.addView(localView)
                 }
                 if (CreateViewElement.KEY_BUTTON == index.ctl_type) {
@@ -160,22 +173,22 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
-
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val c = Calendar.getInstance()
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
-            val dialog = DatePickerDialog(activity!!, this, year, month, day)
-            dialog.datePicker.maxDate = c.timeInMillis
-            return dialog
-        }
-
-        override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-            val date = "${month + 1}/${day}/${year}"
-        }
-    }
+//    open class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
+//
+//        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+//            val c = Calendar.getInstance()
+//            val year = c.get(Calendar.YEAR)
+//            val month = c.get(Calendar.MONTH)
+//            val day = c.get(Calendar.DAY_OF_MONTH)
+//            val dialog = DatePickerDialog(activity!!, this, year, month, day)
+//            dialog.datePicker.maxDate = c.timeInMillis
+//            return dialog
+//        }
+//
+//        override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
+//            val date = "${month + 1}/${day}/${year}"
+//        }
+//    }
 
 
 }

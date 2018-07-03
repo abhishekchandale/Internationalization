@@ -12,11 +12,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.oottru.internationalization.MainActivity
 import com.oottru.internationalization.R
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
+import com.oottru.internationalization.model.TranslationApiResponse
 import com.oottru.internationalization.model.TranslationsModel
 import com.oottru.internationalization.service.ApiServiceInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,13 +32,13 @@ class SignInFragment : Fragment() {
     private var progress: ProgressDialog? = null
     private var gson: Gson? = null
     private var translationsList: List<TranslationsModel>? = null
+    private var translationApiModel: TranslationApiResponse? = null
     var lblEmail: TextView? = null
     var lblPassword: TextView? = null
     var lblLoginHead: TextView? = null
     var edEmail: EditText? = null
     var edPassword: EditText? = null
     var btnLogin: Button? = null
-    var tempIntent: String? = null
     var mView: View? = null
     var prefs: Prefs? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,6 @@ class SignInFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        tempIntent = arguments?.getString(Constants.KEY_TRANSLATION_RESPONSE)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,14 +60,16 @@ class SignInFragment : Fragment() {
         edPassword = mView?.findViewById(R.id.etPassword) as EditText
         btnLogin = mView?.findViewById(R.id.mbl_btn_login) as Button
         prefs = Prefs(this.activity!!)
-        if (tempIntent == null) {
+
+
+        if (prefs?.transaltion == null) {
             translationApiCall()
         } else {
-            prepareUI(tempIntent!!)
+            prepareUI(prefs?.transaltion!!)
         }
         btnLogin?.setOnClickListener {
             prefs?.isLogin = true
-            navigateToActivity(tempIntent!!)
+            navigateToActivity()
         }
     }
 
@@ -107,13 +108,15 @@ class SignInFragment : Fragment() {
 
     fun prepareUI(json: String) {
         gson = Gson()
-        val listType = object : TypeToken<List<TranslationsModel>>() {}.type
+        //  val listType = object : TypeToken<List<TranslationsModel>>() {}.type
         if (json == null) {
             return
         } else {
-            translationsList = gson?.fromJson(json, listType)
+            translationApiModel = gson?.fromJson(json, TranslationApiResponse::class.java)
+            //  translationsList = gson?.fromJson(json, listType)
         }
-        if (translationsList != null) {
+        if (translationApiModel != null) {
+            translationsList = translationApiModel?.Translation_Masters
             for (index in translationsList!!) {
 
                 if (Constants.PROJECT_SINGIN_MESSAGE.toLowerCase() == index.resource_key.toLowerCase()) {
@@ -144,9 +147,8 @@ class SignInFragment : Fragment() {
         }
     }
 
-    fun navigateToActivity(translation: String) {
+    fun navigateToActivity() {
         val intent = Intent(activity, MainActivity::class.java)
-        intent.putExtra(Constants.KEY_TRANSLATION_RESPONSE, translation)
         startActivity(intent)
     }
 }

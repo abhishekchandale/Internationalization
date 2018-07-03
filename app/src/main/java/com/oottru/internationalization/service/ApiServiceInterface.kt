@@ -24,8 +24,13 @@ interface ApiServiceInterface {
     @GET("translation")
     fun getTranslations(@Query("code") code: String): Observable<List<TranslationsModel>>
 
+
+    @GET("translation")
+    fun getTranslationsChange(@Query("code") code: String): Observable<TranslationApiResponse>
+
     @GET("profiles")
     fun getProfile(): Observable<List<ProfileModel>>
+
     companion object {
         fun create(): ApiServiceInterface {
 

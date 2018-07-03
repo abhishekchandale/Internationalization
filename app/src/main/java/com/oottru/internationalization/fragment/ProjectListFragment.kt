@@ -8,14 +8,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
 import com.oottru.internationalization.R
 import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.fragment.adapter.ProjectListAdapter
 import com.oottru.internationalization.model.ProjectModel
-import com.oottru.internationalization.service.ApiServiceInterface
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.oottru.internationalization.model.TranslationApiResponse
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 
 class ProjectListFragment : Fragment(), ProjectListContract.View {
@@ -23,14 +22,14 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
     private var recycler: RecyclerView? = null
     private var layoutManager: GridLayoutManager? = null
     private var compositeDisposable: CompositeDisposable? = null
-    private var mArrayList: ArrayList<ProjectModel>? = null
     private var progress: ProgressDialog? = null
     private var prefs: Prefs? = null
+    private var translationApiResponse: TranslationApiResponse? = null
+    private var gson: Gson? = null
 
     override lateinit var presenter: ProjectListContract.Presenter
-
-    private val apiService by lazy {
-        ApiServiceInterface.create()
+    companion object {
+        fun newInstance() = ProjectListFragment()
     }
 
     override fun onResume() {
@@ -41,7 +40,6 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Create the presenter
         presenter = ProjectListPresenter()
         mView = inflater.inflate(R.layout.fragment_one, container, false)
         return mView
@@ -53,47 +51,31 @@ class ProjectListFragment : Fragment(), ProjectListContract.View {
         recycler = mView?.findViewById(R.id.recyclerView) as RecyclerView
         compositeDisposable = CompositeDisposable()
         prefs = Prefs(this.activity!!)
-        loadJSON()
+        loadJSON(prefs?.transaltion!!)
     }
 
-    companion object {
-        fun newInstance() = ProjectListFragment()
-    }
 
-    private fun loadJSON() {
+    private fun loadJSON(translation: String) {
         progress = ProgressDialog.show(
                 activity!!, null,
                 "Loading... ", true
         )
-        compositeDisposable?.add(apiService.getProjectList(prefs?.language!!)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError))
-
+        gson = Gson()
+        translationApiResponse = gson?.fromJson(translation, TranslationApiResponse::class.java)
+        handleResponse(translationApiResponse?.Values!!)
     }
 
-    private fun handleResponse(androidList: List<ProjectModel>) {
+    private fun handleResponse(projectModel: List<ProjectModel>) {
         if (progress != null) {
             progress?.dismiss()
             progress?.cancel()
         }
-        mArrayList = ArrayList(androidList)
-        val adapter = ProjectListAdapter(mArrayList!!, this)
-        layoutManager = GridLayoutManager(this.activity!!, 2, GridLayoutManager.VERTICAL, false)
-        recycler?.layoutManager = layoutManager
-        recycler?.setAdapter(adapter)
-    }
-
-    private fun handleError(error: Throwable) {
-        println("Error ${error.localizedMessage}")
-        if (progress != null) {
-            progress?.dismiss()
-            progress?.cancel()
+        if (projectModel != null && projectModel.size > 0) {
+            val adapter = ProjectListAdapter(projectModel, this)
+            layoutManager = GridLayoutManager(this.activity!!, 2, GridLayoutManager.VERTICAL, false)
+            recycler?.layoutManager = layoutManager
+            recycler?.setAdapter(adapter)
         }
-    }
 
-    override fun onPause() {
-        super.onPause()
-        compositeDisposable?.clear()
     }
 }

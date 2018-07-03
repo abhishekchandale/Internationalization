@@ -1,9 +1,7 @@
 package com.oottru.internationalization.fragment.adapter
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,7 @@ import com.oottru.internationalization.fragment.ProjectListFragment
 import com.oottru.internationalization.model.ProjectModel
 import kotlinx.android.synthetic.main.fragment_project_list_item.view.*
 
-class ProjectListAdapter(val items: ArrayList<ProjectModel>, val context: ProjectListFragment) : RecyclerView.Adapter<ProjectListAdapter.ViewHolder>() {
+class ProjectListAdapter(val items: List<ProjectModel>, val context: ProjectListFragment) : RecyclerView.Adapter<ProjectListAdapter.ViewHolder>() {
 
     lateinit var ctx: ProjectListFragment
     var gson: Gson? = null
@@ -31,7 +29,6 @@ class ProjectListAdapter(val items: ArrayList<ProjectModel>, val context: Projec
         holder?.txtTitle.text = items.get(position).name
         Glide.with(context).load(items.get(position).picture)
                 .into(holder?.imgProject)
-
 
         holder.cardView.setOnClickListener {
 

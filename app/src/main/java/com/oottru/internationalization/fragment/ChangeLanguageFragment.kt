@@ -35,6 +35,7 @@ class ChangeLanguageFragment : Fragment() {
     private var prefs: Prefs? = null
     private var txSelectedLang: TextView? = null
     lateinit var listener: LanguageChangeListener
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         mView = inflater.inflate(R.layout.fragment_language, container, false)
