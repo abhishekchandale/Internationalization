@@ -18,7 +18,7 @@ import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.fragment.adapter.ChangeLanguageAdapter
 import com.oottru.internationalization.model.LanguageModel
-import com.oottru.internationalization.model.TranslationsModel
+import com.oottru.internationalization.model.TranslationApiResponse
 import com.oottru.internationalization.service.ApiServiceInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -115,14 +115,14 @@ class ChangeLanguageFragment : Fragment() {
                 activity!!, null,
                 "Preparing... ", true
         )
-        compositeDisposable?.add(apiService.getTranslations(code)
+        compositeDisposable?.add(apiService.getTranslationsChange(code)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleTranslationResponse, this::handleTranslationError))
     }
 
-    fun handleTranslationResponse(translationList: List<TranslationsModel>) {
-        if (translationList.size > 0 && translationList != null) {
+    fun handleTranslationResponse(translationList: TranslationApiResponse) {
+        if (translationList.Translation_Masters.size > 0 && translationList != null) {
             prefs?.transaltion = gson?.toJson(translationList)!!
             if (prefs?.isLogin == false) {
                 navigateTo(SignInFragment.newInstance(), gson?.toJson(translationList)!!)
