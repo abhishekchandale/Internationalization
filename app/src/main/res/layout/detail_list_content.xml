@@ -144,5 +144,19 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/detail_divider_line_color" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_45px" />
+
+        <include
+            android:id="@+id/detail_assemble_view"
+            layout="@layout/widget_assemble_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_17px" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

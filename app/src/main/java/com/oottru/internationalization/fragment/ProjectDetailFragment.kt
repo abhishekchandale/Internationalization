@@ -16,6 +16,7 @@ import com.oottru.internationalization.model.TranslationsModel
 import kotlinx.android.synthetic.main.bottom_sheet.*
 import kotlinx.android.synthetic.main.everythingelse_view.*
 import kotlinx.android.synthetic.main.fragment_project_list_detail.*
+import kotlinx.android.synthetic.main.widget_assemble_view.*
 import kotlinx.android.synthetic.main.widget_detail_description_view.*
 import kotlinx.android.synthetic.main.widget_detail_finished_size_view.*
 import kotlinx.android.synthetic.main.widget_detail_header_view.*
@@ -109,8 +110,14 @@ class ProjectDetailFragment : Fragment(), ProjectDetailContract.View {
             if (Constants.PROJECT_DETAILS_COMPLETION_TIME.toLowerCase() == index.resource_key.toLowerCase()) {
                 detail_duration.setText(model?.duration)
             }
+            if (Constants.PROJECT_DETAIL_ASSEMBLE.toLowerCase() == index.resource_key.toLowerCase()) {
+                detail_assemble_tittle.setText(index.value)
+                detail_assemble_value.setText(model?.assemble_value)
+
+            }
+
             if (Constants.PROJECT_DETAILS_PRICE.toLowerCase() == index.resource_key.toLowerCase()) {
-                item_price.text = model?.price.toString()
+                item_price.text = model?.cost
             }
         }
 
