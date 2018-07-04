@@ -29,7 +29,7 @@ interface ApiServiceInterface {
     fun getTranslationsChange(@Query("code") code: String): Observable<TranslationApiResponse>
 
     @GET("profiles")
-    fun getProfile(): Observable<List<ProfileModel>>
+    fun getProfile(@Query("code") code: String): Observable<List<ProfileModel>>
 
     companion object {
         fun create(): ApiServiceInterface {

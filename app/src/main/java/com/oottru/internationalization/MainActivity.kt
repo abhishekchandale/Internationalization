@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         changeMenuText(prefs?.transaltion)
     }
 
-
     private var tempIntent: String? = null
     private var gson: Gson? = null
     private var translationModel: List<TranslationsModel>? = null
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         changeMenuText(prefs?.transaltion!!)
 //        if (tempIntent != null)
 //            changeMenuText(tempIntent!!)
+
         navigateTo(ProjectListFragment.newInstance())
     }
 
@@ -96,7 +97,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun navigateTo(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.contentFrame, fragment).commit()
+                .replace(R.id.contentFrame, fragment)
+                .commit()
     }
 
 
@@ -153,6 +155,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             translationApiResponse = gson?.fromJson(translation, TranslationApiResponse::class.java)
             translationModel = translationApiResponse?.Translation_Masters
+
+
         }
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         var menu: Menu = navigationView.getMenu()
@@ -176,5 +180,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish()
+        }
+        return super.onKeyDown(keyCode, event)
+    }
 }

@@ -13,9 +13,10 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/profile_page_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile page"
+            android:text=""
             android:textColor="@color/detail_label_medium_font_color"
             android:textSize="22dp"
             android:textStyle="bold" />

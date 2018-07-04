@@ -18,6 +18,11 @@ import io.reactivex.disposables.CompositeDisposable
 
 
 class ProjectListFragment : Fragment(), ProjectListContract.View {
+
+    override fun sayHello() {
+
+    }
+
     private var mView: View? = null
     private var recycler: RecyclerView? = null
     private var layoutManager: GridLayoutManager? = null

@@ -14,12 +14,17 @@ import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
 import com.oottru.internationalization.R
+import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.CreateViewElement
+import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.model.ProfileModel
+import com.oottru.internationalization.model.TranslationApiResponse
+import com.oottru.internationalization.model.TranslationsModel
 import com.oottru.internationalization.service.ApiServiceInterface
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_profile.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,6 +42,9 @@ class ProfileFragment : Fragment() {
     private var myCalendar: Calendar? = null
     var dateSetListener: DatePickerDialog.OnDateSetListener? = null
     private var etDate: EditText? = null
+    private var prefs: Prefs? = null
+    private var translationApiResponse: TranslationApiResponse? = null
+    private var translationsModel: List<TranslationsModel>? = null
 
 
     companion object {
@@ -59,8 +67,23 @@ class ProfileFragment : Fragment() {
         mChildLayout = mView?.findViewById(R.id.layout_child) as LinearLayout
         mCreatView = CreateViewElement(this.activity!!)
         compositeDisposable = CompositeDisposable()
+        prefs = Prefs(this.activity!!)
         gson = Gson()
+        changeTranslationKeys()
         profileApiCall()
+    }
+
+    fun changeTranslationKeys() {
+        translationApiResponse = gson?.fromJson(prefs?.transaltion, TranslationApiResponse::class.java)
+        translationsModel = translationApiResponse?.Translation_Masters
+        for (index in translationsModel!!) {
+            if (Constants.PROFILE.toLowerCase() == index.resource_key.toLowerCase()) {
+                profile_page_header.text = index.value
+
+            }
+        }
+
+
     }
 
 
@@ -123,7 +146,7 @@ class ProfileFragment : Fragment() {
                         myCalendar?.set(Calendar.MONTH, monthOfYear)
                         myCalendar?.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                         editable = SpannableStringBuilder(sdf.format(myCalendar?.time))
-                        etDate?.text=editable
+                        etDate?.text = editable
                         println("EDITABLE ${editable.toString()}")
                     }
                     editable = SpannableStringBuilder(sdf.format(myCalendar?.time))
@@ -148,7 +171,7 @@ class ProfileFragment : Fragment() {
                 activity!!, null,
                 "Getting view ... ", true
         )
-        compositeDisposable?.add(apiService.getProfile()
+        compositeDisposable?.add(apiService.getProfile(prefs?.language!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleLanguageResponse, this::handleLanguageError))
