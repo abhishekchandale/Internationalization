@@ -3,6 +3,7 @@ package com.oottru.internationalization
 import android.app.Application
 import com.oottru.internationalization.Util.Prefs
 
+
 class MyApplication : Application() {
 
     var prefs: Prefs? = null
@@ -21,6 +22,5 @@ class MyApplication : Application() {
             return mInstance
         }
     }
-
 
 }

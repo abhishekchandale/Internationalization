@@ -21,7 +21,7 @@
     <dimen name="detail_17px">8.5dp</dimen>
     <dimen name="detail_20px">10dp</dimen>
     <dimen name="detail_8px">4dp</dimen>
-
+    <dimen name="fab_margin">16dp</dimen>
     <dimen name="material_10dp">10dip</dimen>
 
 
