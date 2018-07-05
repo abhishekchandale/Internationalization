@@ -34,6 +34,7 @@ class Constants {
         val PROJECT_DETAILS_COMPLETION_TIME: String = "PROJECT_DETAILS_COMPLETION_TIME"
         val PROJECT_DETAILS_PRICE: String = "PROJECT_DETAILS_PRICE"
         val PROFILE: String = "PROFILE"
+        val GERMAN_LANGUAGE_CODE="DE"
 
 
     }

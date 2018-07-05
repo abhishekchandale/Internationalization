@@ -80,6 +80,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/sign_in_ed_bg"
             android:padding="10dp"
+            android:text="abhishek@cricut.com"
             android:textColorHint="#cccccc" />
 
         <TextView
@@ -99,6 +100,7 @@
             android:background="@drawable/sign_in_ed_bg"
             android:padding="10dp"
             android:password="true"
+            android:text="123456"
             android:textColorHint="#cccccc" />
 
     </LinearLayout>

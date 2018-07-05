@@ -121,7 +121,7 @@ class ProfileFragment : Fragment() {
                 }
                 if (CreateViewElement.KEY_DATE == index.ctl_type) {
                     myCalendar = Calendar.getInstance()
-                    val myFormat = "MM/dd/yy" //In which you need put here
+                    val myFormat = "MM/dd/yyyy" //In which you need put here
                     val sdf = SimpleDateFormat(myFormat, Locale.US)
                     localView = mCreatView?.getItemViewType(CreateViewElement.KEY_TEXT_VIEW)
                     localView as TextView

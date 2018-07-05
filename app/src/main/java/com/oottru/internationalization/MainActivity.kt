@@ -15,7 +15,6 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
-import com.oottru.internationalization.R.id.*
 import com.oottru.internationalization.Util.Constants
 import com.oottru.internationalization.Util.Prefs
 import com.oottru.internationalization.activity.SettingsActivity
@@ -55,10 +54,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initNavigation()
         prefs = Prefs(this)
         changeMenuText(prefs?.transaltion!!)
-//        if (tempIntent != null)
-//            changeMenuText(tempIntent!!)
         navigateTo(ProjectListFragment.newInstance())
     }
+
 
     private fun showMessage(isConnected: Boolean) {
 
@@ -178,6 +176,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             translationApiResponse = gson?.fromJson(translation, TranslationApiResponse::class.java)
             translationModel = translationApiResponse?.Translation_Masters
         }
+
         val navigationView = findViewById(R.id.nav_view) as NavigationView
         var menu: Menu = navigationView.getMenu()
         if (translationModel != null) {
@@ -194,6 +193,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     menu.findItem(R.id.mbl_lblsignout).title = index.value
                 if (Constants.MBL_LBL_PROFILE == index.resource_key)
                     menu.findItem(R.id.mbl_lbl_profile).title = index.value
+                if (Constants.APPLICATION_LABEL.toLowerCase() == index.resource_key.toLowerCase()) {
+                    supportActionBar?.title = index.value
+
+                }
             }
 
         }
